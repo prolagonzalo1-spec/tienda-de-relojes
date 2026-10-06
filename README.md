@@ -1,10 +1,10 @@
 # LUXURY TIME
 
-Boutique ficticia de alta relojería: una experiencia visual, sin venta.
+Boutique de alta relojería: una experiencia visual, sin venta.
 Sitio 100 % estático (HTML, CSS y JavaScript) pensado para GitHub Pages, con animaciones de
 [GSAP](https://gsap.com/) + ScrollTrigger.
 
-> Proyecto académico. Las marcas y modelos son ficticios.
+> Proyecto académico sin fines comerciales. Las marcas, nombres e imágenes pertenecen a sus respectivos titulares.
 
 ## Flujo
 
@@ -36,22 +36,22 @@ Todo el contenido sale de `data.json`; para agregar marcas o modelos no hace fal
   "site": { "name", "tagline", "eyebrow", "footer" },
   "brands": [
     {
-      "id": "aurele",                  // se usa en la URL y en la carpeta de assets
-      "name": "Maison Aurèle",
-      "short": "AURÈLE",               // texto que aparece en los placeholders
+      "id": "rolex",                   // se usa en la URL y en la carpeta de assets
+      "name": "Rolex",
+      "short": "ROLEX",                // texto que aparece en los placeholders
       "origin": "Ginebra",
-      "founded": 1874,
-      "logo": "assets/aurele/logo.svg",
-      "intro": { "video": "assets/aurele/intro.mp4", "poster": "assets/aurele/intro-poster.webp" },
+      "founded": 1905,
+      "logo": "assets/rolex/logo.svg",
+      "intro": { "video": "assets/rolex/intro.mp4", "poster": "assets/rolex/intro-poster.webp" },
       "description": "…",
       "models": [
         {
-          "id": "nocturne-tourbillon",   // no usar "presentacion" como id
-          "name": "Nocturne Tourbillon",
-          "collection": "Nocturne",
-          "reference": "Ref. 7020P",
+          "id": "submariner-date-azul",  // no usar "presentacion" como id
+          "name": "Submariner Date · Azul",
+          "collection": "Submariner",
+          "reference": "Ref. 126619LB",
           "palette": { "dial": "#0d1a2b", "metal": "platinum", "strap": "leather", "strapColor": "#0b0f18" },
-          "images": ["assets/aurele/nocturne-tourbillon/01.webp", "… 02 a 06"],
+          "images": ["assets/rolex/submariner-date-azul/01.webp", "… 02 a 06"],
           "sections": [
             { "id": "presentacion", "eyebrow": "Presentación", "title": "…", "text": "…", "image": 0 }
             // esfera, caja, movimiento, malla…  "image" = índice (desde 0) en "images"
@@ -70,6 +70,15 @@ Todo el contenido sale de `data.json`; para agregar marcas o modelos no hace fal
 
 - Una marca con `"models": []` (o con `"status": "coming-soon"`) aparece como **Próximamente**. Al cargarle modelos se habilita sola.
 - La primera imagen de `images` es la foto del catálogo.
+- `images` puede tener menos de 6 fotos: varias secciones pueden apuntar al mismo índice.
+
+### Marcas actuales
+
+| Marca | Estado | Modelos |
+|---|---|---|
+| Rolex | Disponible | Submariner Date Azul (126619LB), Oro y azul (126618LB), Oro y negro (126618LN), Submariner Negro (124060), Submariner Date Verde (116610LV) |
+| Patek Philippe | Próximamente | — |
+| Audemars Piguet | Próximamente | — |
 
 ## Assets
 

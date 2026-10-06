@@ -304,8 +304,17 @@
       video.removeAttribute('src');
       video.style.display = 'none';
       fallback.hidden = false;
+      // Si hay póster, queda de fondo detrás del nombre de la marca.
+      // (si todavía está cargando se usa igual; si falla, data-hide-on-error lo oculta)
+      var hasPoster = poster && poster.style.display !== 'none' && !(poster.complete && poster.naturalWidth === 0);
+      fallback.classList.toggle('has-poster', !!hasPoster);
       if (!hasGsap) { timers.push(setTimeout(finish, 4000)); return; }
       fallbackTl = gsap.timeline({ onComplete: finish });
+      if (hasPoster) {
+        fallbackTl
+          .fromTo(poster, { autoAlpha: 0, scale: 1.12 }, { autoAlpha: 1, duration: 2.4, ease: 'power2.out' }, 0)
+          .to(poster, { scale: 1, duration: 7, ease: 'power1.out' }, 0);
+      }
       fallbackTl
         .set(progress, { scaleX: 0 })
         .from(fallback.querySelector('.if-logo') || [], { autoAlpha: 0, scale: 0.9, duration: 2 }, 0.2)

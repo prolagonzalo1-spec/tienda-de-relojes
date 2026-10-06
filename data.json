@@ -3,355 +3,576 @@
     "name": "LUXURY TIME",
     "tagline": "El tiempo, en su forma más pura.",
     "eyebrow": "Haute Horlogerie",
-    "footer": "Proyecto académico. Las marcas y modelos presentados son ficticios."
+    "footer": "Proyecto académico sin fines comerciales. Las marcas, nombres e imágenes pertenecen a sus respectivos titulares."
   },
   "brands": [
     {
-      "id": "aurele",
-      "name": "Maison Aurèle",
-      "short": "AURÈLE",
+      "id": "rolex",
+      "name": "Rolex",
+      "short": "ROLEX",
       "origin": "Ginebra",
-      "founded": 1874,
-      "logo": "assets/aurele/logo.svg",
+      "founded": 1905,
+      "logo": "assets/rolex/logo.svg",
       "intro": {
-        "video": "assets/aurele/intro.mp4",
-        "poster": "assets/aurele/intro-poster.webp"
+        "video": "assets/rolex/intro.mp4",
+        "poster": "assets/rolex/intro-poster.webp"
       },
-      "description": "Desde un pequeño taller junto al lago Lemán, Maison Aurèle cultiva desde 1874 el arte de las grandes complicaciones. Cada pieza se ensambla, decora y regula a mano por un único relojero.",
+      "description": "Fundada en 1905 por Hans Wilsdorf, Rolex creó el primer reloj de pulsera hermético, el Oyster, y convirtió la precisión en una forma de excelencia. La colección Submariner, nacida en 1953, es su homenaje a las profundidades.",
       "models": [
         {
-          "id": "heritage-calendario-perpetuo",
-          "name": "Héritage Calendario Perpetuo",
-          "collection": "Héritage",
-          "reference": "Ref. 5874R",
-          "palette": { "dial": "#e6dfd0", "metal": "rose", "strap": "leather", "strapColor": "#2b1a12" },
+          "id": "submariner-date-azul",
+          "name": "Submariner Date · Azul",
+          "collection": "Submariner",
+          "reference": "Ref. 126619LB",
+          "palette": {
+            "dial": "#1c3f9e",
+            "metal": "platinum",
+            "strap": "bracelet"
+          },
           "images": [
-            "assets/aurele/heritage-calendario-perpetuo/01.webp",
-            "assets/aurele/heritage-calendario-perpetuo/02.webp",
-            "assets/aurele/heritage-calendario-perpetuo/03.webp",
-            "assets/aurele/heritage-calendario-perpetuo/04.webp",
-            "assets/aurele/heritage-calendario-perpetuo/05.webp",
-            "assets/aurele/heritage-calendario-perpetuo/06.webp"
+            "assets/rolex/submariner-date-azul/01.webp",
+            "assets/rolex/submariner-date-azul/02.webp",
+            "assets/rolex/submariner-date-azul/03.webp",
+            "assets/rolex/submariner-date-azul/04.webp",
+            "assets/rolex/submariner-date-azul/05.webp",
+            "assets/rolex/submariner-date-azul/06.webp"
           ],
           "sections": [
-            { "id": "presentacion", "eyebrow": "Presentación", "title": "Héritage Calendario Perpetuo", "text": "Un mecanismo que conoce la duración de cada mes y la llegada de los años bisiestos. No necesitará corrección hasta el año 2100: una promesa de permanencia escrita en oro rosa.", "image": 0 },
-            { "id": "esfera", "eyebrow": "La esfera", "title": "Una lectura serena", "text": "Esfera opalina de tono marfil con tres contadores ligeramente rebajados para el día, la fecha y el mes. Los índices aplicados en oro rosa se pulen a mano hasta capturar la luz sin reflejos.", "image": 1 },
-            { "id": "caja", "eyebrow": "La caja", "title": "Oro rosa de 18 quilates", "text": "Una caja redonda de 39 mm con carrura satinada y bisel pulido espejo. Los correctores empotrados en el flanco se accionan con un lápiz de madera, discretos como una firma.", "image": 2 },
-            { "id": "movimiento", "eyebrow": "El movimiento", "title": "Calibre A-240 QP", "text": "Movimiento de carga automática con micro-rotor en oro de 22 quilates. Sus 312 componentes reciben acabados Côtes de Genève, perlado y biselado a mano, visibles a través del fondo de zafiro.", "image": 3 },
-            { "id": "malla", "eyebrow": "La correa", "title": "Aligátor cosido a mano", "text": "Correa de aligátor marrón chocolate con escamas cuadradas y forro de piel de becerro. Se cierra con una hebilla ardillón en oro rosa grabada con el monograma de la casa.", "image": 4 }
+            {
+              "id": "presentacion",
+              "eyebrow": "Presentación",
+              "title": "Submariner Date",
+              "text": "El reloj de buceo por excelencia, en oro blanco de 18 quilates. Una pieza que nació en 1953 para explorar las profundidades y que hoy es una referencia absoluta de la relojería.",
+              "image": 0
+            },
+            {
+              "id": "esfera",
+              "eyebrow": "La esfera",
+              "title": "Azul intenso",
+              "text": "Esfera azul con índices luminiscentes Chromalight que emiten un resplandor azul de larga duración en la oscuridad. Cada aplique está engastado en oro de 18 quilates para evitar la oxidación.",
+              "image": 1
+            },
+            {
+              "id": "caja",
+              "eyebrow": "La caja",
+              "title": "Oyster, hermética hasta 300 metros",
+              "text": "La caja Oyster de 41 mm, con fondo atornillado y corona Triplock de triple junta, protege el movimiento como un verdadero submarino en miniatura.",
+              "image": 2
+            },
+            {
+              "id": "movimiento",
+              "eyebrow": "El movimiento",
+              "title": "Calibre 3235",
+              "text": "Movimiento mecánico de carga automática íntegramente desarrollado y fabricado por Rolex. Su escape Chronergy y su espiral Parachrom azul le otorgan una precisión de −2/+2 segundos por día.",
+              "image": 3
+            },
+            {
+              "id": "malla",
+              "eyebrow": "El brazalete",
+              "title": "Brazalete Oyster",
+              "text": "Eslabones macizos de tres hileras en oro blanco, con cierre Oysterlock y sistema Glidelock, que permite ajustar la longitud unos 20 mm sin herramientas, incluso sobre un traje de buceo.",
+              "image": 4
+            }
           ],
           "specifications": {
             "title": "Especificaciones técnicas",
             "image": 5,
             "items": [
-              { "label": "Referencia", "value": "5874R-001" },
-              { "label": "Caja", "value": "Oro rosa de 18 quilates" },
-              { "label": "Diámetro", "value": "39 mm" },
-              { "label": "Espesor", "value": "9,7 mm" },
-              { "label": "Hermeticidad", "value": "30 m" },
-              { "label": "Calibre", "value": "A-240 QP, automático" },
-              { "label": "Reserva de marcha", "value": "48 horas" },
-              { "label": "Frecuencia", "value": "21.600 a/h (3 Hz)" },
-              { "label": "Funciones", "value": "Horas, minutos, calendario perpetuo, fases lunares" },
-              { "label": "Cristal", "value": "Zafiro antirreflejo, fondo visto" }
+              {
+                "label": "Referencia",
+                "value": "126619LB"
+              },
+              {
+                "label": "Caja",
+                "value": "Oyster, 41 mm, oro blanco de 18 quilates"
+              },
+              {
+                "label": "Bisel",
+                "value": "Giratorio unidireccional graduado 60 minutos, disco Cerachrom azul"
+              },
+              {
+                "label": "Hermeticidad",
+                "value": "300 m / 1.000 pies"
+              },
+              {
+                "label": "Calibre",
+                "value": "3235, perpetual, carga automática"
+              },
+              {
+                "label": "Precisión",
+                "value": "−2/+2 s/día tras el encajado"
+              },
+              {
+                "label": "Reserva de marcha",
+                "value": "Aprox. 70 horas"
+              },
+              {
+                "label": "Funciones",
+                "value": "Horas, minutos, segundero central, fecha instantánea"
+              },
+              {
+                "label": "Esfera",
+                "value": "Azul, índices Chromalight"
+              },
+              {
+                "label": "Brazalete",
+                "value": "Oyster, cierre Oysterlock con sistema de extensión Glidelock"
+              },
+              {
+                "label": "Cristal",
+                "value": "Zafiro con lente Cyclops sobre la fecha"
+              }
             ]
           }
         },
         {
-          "id": "nocturne-tourbillon",
-          "name": "Nocturne Tourbillon",
-          "collection": "Nocturne",
-          "reference": "Ref. 7020P",
-          "palette": { "dial": "#0d1a2b", "metal": "platinum", "strap": "leather", "strapColor": "#0b0f18" },
+          "id": "submariner-date-oro-azul",
+          "name": "Submariner Date · Oro y azul",
+          "collection": "Submariner",
+          "reference": "Ref. 126618LB",
+          "palette": {
+            "dial": "#1f3fa6",
+            "metal": "gold",
+            "strap": "bracelet"
+          },
           "images": [
-            "assets/aurele/nocturne-tourbillon/01.webp",
-            "assets/aurele/nocturne-tourbillon/02.webp",
-            "assets/aurele/nocturne-tourbillon/03.webp",
-            "assets/aurele/nocturne-tourbillon/04.webp",
-            "assets/aurele/nocturne-tourbillon/05.webp",
-            "assets/aurele/nocturne-tourbillon/06.webp"
+            "assets/rolex/submariner-date-oro-azul/01.webp",
+            "assets/rolex/submariner-date-oro-azul/02.webp",
+            "assets/rolex/submariner-date-oro-azul/03.webp",
+            "assets/rolex/submariner-date-oro-azul/04.webp"
           ],
           "sections": [
-            { "id": "presentacion", "eyebrow": "Presentación", "title": "Nocturne Tourbillon", "text": "Una jaula de titanio que gira sobre sí misma una vez por minuto para desafiar la gravedad. La Nocturne es la expresión más íntima de la casa: hecha para ser contemplada en silencio.", "image": 0 },
-            { "id": "esfera", "eyebrow": "La esfera", "title": "Azul medianoche", "text": "Esfera de esmalte grand feu azul medianoche, cocida once veces a más de 800 °C. A las seis horas, una abertura revela el tourbillon como una pequeña constelación en movimiento.", "image": 1 },
-            { "id": "caja", "eyebrow": "La caja", "title": "Platino 950", "text": "El metal más noble y denso de la relojería da forma a una caja de 41 mm. Un diamante solitario engastado entre las asas a las seis horas distingue, en silencio, cada pieza en platino.", "image": 2 },
-            { "id": "movimiento", "eyebrow": "El movimiento", "title": "Calibre A-T1 de cuerda manual", "text": "Puentes en forma de flecha achaflanados a mano, ángulos entrantes imposibles de lograr a máquina y una jaula de tourbillon de apenas 0,3 gramos. Ochenta horas de reserva de marcha.", "image": 3 },
-            { "id": "malla", "eyebrow": "La correa", "title": "Aligátor azul noche", "text": "Correa de aligátor azul noche mate, cosida a mano en el taller de la Maison, con cierre desplegable en platino que protege la piel con el uso diario.", "image": 4 }
+            {
+              "id": "presentacion",
+              "eyebrow": "Presentación",
+              "title": "Submariner Date",
+              "text": "Oro amarillo de 18 quilates y azul real: la versión más luminosa del Submariner. Un reloj profesional que conserva toda su robustez bajo una presencia solar.",
+              "image": 0
+            },
+            {
+              "id": "esfera",
+              "eyebrow": "La esfera",
+              "title": "Azul real",
+              "text": "Esfera azul real con acabado rayos de sol, índices en oro amarillo rellenos de material Chromalight y la ventana de fecha ampliada por la lente Cyclops a las 3 horas.",
+              "image": 1
+            },
+            {
+              "id": "caja",
+              "eyebrow": "La caja",
+              "title": "Corona Triplock",
+              "text": "La corona de remontuar, atornillada sobre el tubo de la caja, lleva la corona de cinco puntas con tres puntos: el sello de su sistema de triple hermeticidad.",
+              "image": 2
+            },
+            {
+              "id": "movimiento",
+              "eyebrow": "El movimiento",
+              "title": "Calibre 3235",
+              "text": "Certificado Cronómetro Superlativo, el calibre 3235 combina el escape Chronergy patentado con una reserva de marcha de aproximadamente 70 horas.",
+              "image": 3
+            },
+            {
+              "id": "malla",
+              "eyebrow": "El brazalete",
+              "title": "Oro amarillo macizo",
+              "text": "Brazalete Oyster en oro amarillo de 18 quilates fundido en la propia fundición de Rolex, con cierre Oysterlock y extensión Glidelock.",
+              "image": 1
+            }
           ],
           "specifications": {
             "title": "Especificaciones técnicas",
-            "image": 5,
+            "image": 0,
             "items": [
-              { "label": "Referencia", "value": "7020P-010" },
-              { "label": "Caja", "value": "Platino 950" },
-              { "label": "Diámetro", "value": "41 mm" },
-              { "label": "Espesor", "value": "10,9 mm" },
-              { "label": "Hermeticidad", "value": "30 m" },
-              { "label": "Calibre", "value": "A-T1, cuerda manual" },
-              { "label": "Reserva de marcha", "value": "80 horas" },
-              { "label": "Frecuencia", "value": "21.600 a/h (3 Hz)" },
-              { "label": "Funciones", "value": "Horas, minutos, tourbillon de un minuto" },
-              { "label": "Esfera", "value": "Esmalte grand feu azul medianoche" }
+              {
+                "label": "Referencia",
+                "value": "126618LB"
+              },
+              {
+                "label": "Caja",
+                "value": "Oyster, 41 mm, oro amarillo de 18 quilates"
+              },
+              {
+                "label": "Bisel",
+                "value": "Giratorio unidireccional graduado 60 minutos, disco Cerachrom azul"
+              },
+              {
+                "label": "Hermeticidad",
+                "value": "300 m / 1.000 pies"
+              },
+              {
+                "label": "Calibre",
+                "value": "3235, perpetual, carga automática"
+              },
+              {
+                "label": "Precisión",
+                "value": "−2/+2 s/día tras el encajado"
+              },
+              {
+                "label": "Reserva de marcha",
+                "value": "Aprox. 70 horas"
+              },
+              {
+                "label": "Funciones",
+                "value": "Horas, minutos, segundero central, fecha instantánea"
+              },
+              {
+                "label": "Esfera",
+                "value": "Azul real, índices Chromalight"
+              },
+              {
+                "label": "Brazalete",
+                "value": "Oyster, cierre Oysterlock con sistema de extensión Glidelock"
+              },
+              {
+                "label": "Cristal",
+                "value": "Zafiro con lente Cyclops sobre la fecha"
+              }
             ]
           }
         },
         {
-          "id": "lumiere-36",
-          "name": "Lumière 36",
-          "collection": "Lumière",
-          "reference": "Ref. 3136G",
-          "palette": { "dial": "#3a3f44", "metal": "steel", "strap": "bracelet" },
+          "id": "submariner-date-oro-negro",
+          "name": "Submariner Date · Oro y negro",
+          "collection": "Submariner",
+          "reference": "Ref. 126618LN",
+          "palette": {
+            "dial": "#0c0c0c",
+            "metal": "gold",
+            "strap": "bracelet"
+          },
           "images": [
-            "assets/aurele/lumiere-36/01.webp",
-            "assets/aurele/lumiere-36/02.webp",
-            "assets/aurele/lumiere-36/03.webp",
-            "assets/aurele/lumiere-36/04.webp",
-            "assets/aurele/lumiere-36/05.webp",
-            "assets/aurele/lumiere-36/06.webp"
+            "assets/rolex/submariner-date-oro-negro/01.webp",
+            "assets/rolex/submariner-date-oro-negro/02.webp",
+            "assets/rolex/submariner-date-oro-negro/03.webp",
+            "assets/rolex/submariner-date-oro-negro/04.webp"
           ],
           "sections": [
-            { "id": "presentacion", "eyebrow": "Presentación", "title": "Lumière 36", "text": "La elegancia esencial: horas, minutos y nada más. Lumière es el reloj que la Maison considera su página en blanco, el punto de partida de todas sus formas.", "image": 0 },
-            { "id": "esfera", "eyebrow": "La esfera", "title": "Pizarra rayos de sol", "text": "Un acabado rayos de sol en tono pizarra que cambia del gris perla al antracita según la luz. Índices bastón de oro blanco y agujas dauphine facetadas.", "image": 1 },
-            { "id": "caja", "eyebrow": "La caja", "title": "Oro blanco, 36 mm", "text": "Proporciones clásicas para una muñeca contemporánea. Un perfil de apenas 7,4 mm que se desliza bajo el puño de la camisa sin hacerse notar.", "image": 2 },
-            { "id": "movimiento", "eyebrow": "El movimiento", "title": "Calibre A-110 ultraplano", "text": "Un movimiento automático de 2,9 mm de altura con rotor periférico, que deja ver toda la arquitectura del calibre sin interrupciones.", "image": 3 },
-            { "id": "malla", "eyebrow": "El brazalete", "title": "Eslabones integrados", "text": "Brazalete de oro blanco con eslabones centrales pulidos y laterales satinados, ensamblados uno a uno para fluir sobre la muñeca como un tejido.", "image": 4 }
+            {
+              "id": "presentacion",
+              "eyebrow": "Presentación",
+              "title": "Submariner Date",
+              "text": "El contraste más clásico: oro amarillo y negro profundo. Una interpretación sobria y poderosa del icónico reloj de buceo.",
+              "image": 0
+            },
+            {
+              "id": "esfera",
+              "eyebrow": "La esfera",
+              "title": "Negro laqueado",
+              "text": "Esfera negra laqueada con índices de oro y agujas Mercedes, perfectamente legibles bajo el agua y en la penumbra.",
+              "image": 1
+            },
+            {
+              "id": "caja",
+              "eyebrow": "La caja",
+              "title": "Detalles de orfebrería",
+              "text": "Cada superficie de la caja Oyster alterna pulido espejo y satinado. La corona Triplock, grabada con el emblema, se atornilla firmemente contra la caja.",
+              "image": 2
+            },
+            {
+              "id": "movimiento",
+              "eyebrow": "El movimiento",
+              "title": "Calibre 3235",
+              "text": "Catorce patentes, espiral Parachrom resistente a los campos magnéticos y amortiguadores Paraflex: un movimiento pensado para resistir las condiciones más exigentes.",
+              "image": 3
+            },
+            {
+              "id": "malla",
+              "eyebrow": "El brazalete",
+              "title": "Brazalete Oyster",
+              "text": "Tres hileras de eslabones planos y macizos en oro amarillo, con un cierre de seguridad que impide cualquier apertura accidental.",
+              "image": 0
+            }
           ],
           "specifications": {
             "title": "Especificaciones técnicas",
-            "image": 5,
+            "image": 1,
             "items": [
-              { "label": "Referencia", "value": "3136G-020" },
-              { "label": "Caja", "value": "Oro blanco de 18 quilates" },
-              { "label": "Diámetro", "value": "36 mm" },
-              { "label": "Espesor", "value": "7,4 mm" },
-              { "label": "Hermeticidad", "value": "50 m" },
-              { "label": "Calibre", "value": "A-110, automático ultraplano" },
-              { "label": "Reserva de marcha", "value": "60 horas" },
-              { "label": "Frecuencia", "value": "28.800 a/h (4 Hz)" },
-              { "label": "Funciones", "value": "Horas, minutos" },
-              { "label": "Brazalete", "value": "Oro blanco, cierre desplegable" }
+              {
+                "label": "Referencia",
+                "value": "126618LN"
+              },
+              {
+                "label": "Caja",
+                "value": "Oyster, 41 mm, oro amarillo de 18 quilates"
+              },
+              {
+                "label": "Bisel",
+                "value": "Giratorio unidireccional graduado 60 minutos, disco Cerachrom negro"
+              },
+              {
+                "label": "Hermeticidad",
+                "value": "300 m / 1.000 pies"
+              },
+              {
+                "label": "Calibre",
+                "value": "3235, perpetual, carga automática"
+              },
+              {
+                "label": "Precisión",
+                "value": "−2/+2 s/día tras el encajado"
+              },
+              {
+                "label": "Reserva de marcha",
+                "value": "Aprox. 70 horas"
+              },
+              {
+                "label": "Funciones",
+                "value": "Horas, minutos, segundero central, fecha instantánea"
+              },
+              {
+                "label": "Esfera",
+                "value": "Negra, índices Chromalight"
+              },
+              {
+                "label": "Brazalete",
+                "value": "Oyster, cierre Oysterlock con sistema de extensión Glidelock"
+              },
+              {
+                "label": "Cristal",
+                "value": "Zafiro con lente Cyclops sobre la fecha"
+              }
             ]
           }
         },
         {
-          "id": "celeste-fases-lunares",
-          "name": "Céleste Fases Lunares",
-          "collection": "Céleste",
-          "reference": "Ref. 4410J",
-          "palette": { "dial": "#121a3a", "metal": "gold", "strap": "leather", "strapColor": "#1d120c" },
+          "id": "submariner-negro",
+          "name": "Submariner · Negro",
+          "collection": "Submariner",
+          "reference": "Ref. 124060",
+          "palette": {
+            "dial": "#0c0c0c",
+            "metal": "steel",
+            "strap": "bracelet"
+          },
           "images": [
-            "assets/aurele/celeste-fases-lunares/01.webp",
-            "assets/aurele/celeste-fases-lunares/02.webp",
-            "assets/aurele/celeste-fases-lunares/03.webp",
-            "assets/aurele/celeste-fases-lunares/04.webp",
-            "assets/aurele/celeste-fases-lunares/05.webp",
-            "assets/aurele/celeste-fases-lunares/06.webp"
+            "assets/rolex/submariner-negro/01.webp",
+            "assets/rolex/submariner-negro/02.webp",
+            "assets/rolex/submariner-negro/03.webp",
+            "assets/rolex/submariner-negro/04.webp",
+            "assets/rolex/submariner-negro/05.webp",
+            "assets/rolex/submariner-negro/06.webp"
           ],
           "sections": [
-            { "id": "presentacion", "eyebrow": "Presentación", "title": "Céleste Fases Lunares", "text": "Una luna de oro que cruza un cielo de aventurina. Céleste traduce el ciclo lunar con una precisión de un día cada 122 años.", "image": 0 },
-            { "id": "esfera", "eyebrow": "La esfera", "title": "Un cielo en la muñeca", "text": "Esfera de aventurina azul salpicada de partículas de cobre que evocan una noche estrellada. El disco lunar está grabado a mano con buril.", "image": 1 },
-            { "id": "caja", "eyebrow": "La caja", "title": "Oro amarillo de 18 quilates", "text": "Una caja de 38 mm con asas curvadas que abrazan la muñeca. El bisel escalonado y pulido le otorga una presencia luminosa sin ostentación.", "image": 2 },
-            { "id": "movimiento", "eyebrow": "El movimiento", "title": "Calibre A-180 L", "text": "Movimiento automático con módulo de fases lunares integrado en la platina, decorado con perlado circular y tornillos azulados al fuego.", "image": 3 },
-            { "id": "malla", "eyebrow": "La correa", "title": "Aligátor marrón tabaco", "text": "Correa de aligátor marrón tabaco con acabado brillante, cosida a mano con hilo de seda y hebilla ardillón en oro amarillo.", "image": 4 }
+            {
+              "id": "presentacion",
+              "eyebrow": "Presentación",
+              "title": "Submariner",
+              "text": "La versión más pura, sin fecha. Fiel al modelo original de 1953, es el Submariner en su expresión más esencial.",
+              "image": 0
+            },
+            {
+              "id": "esfera",
+              "eyebrow": "La esfera",
+              "title": "Simetría perfecta",
+              "text": "Sin ventana de fecha ni lente Cyclops, la esfera negra muestra una simetría total: índices geométricos, triángulo a las 12 y agujas Mercedes.",
+              "image": 1
+            },
+            {
+              "id": "caja",
+              "eyebrow": "La caja",
+              "title": "Acero Oystersteel",
+              "text": "La corona Triplock, protegida por los resaltes de la caja, sobresale apenas de un perfil de 41 mm tallado en Oystersteel, una aleación de acero extremadamente resistente a la corrosión.",
+              "image": 2
+            },
+            {
+              "id": "movimiento",
+              "eyebrow": "El movimiento",
+              "title": "Calibre 3230",
+              "text": "Movimiento automático de nueva generación, con escape Chronergy y aproximadamente 70 horas de reserva de marcha. Certificado Cronómetro Superlativo.",
+              "image": 3
+            },
+            {
+              "id": "malla",
+              "eyebrow": "El brazalete",
+              "title": "Hecho para el agua",
+              "text": "Brazalete Oyster en acero con extensión Glidelock: el reloj se ajusta en segundos sobre un traje de neopreno y vuelve a la muñeca al salir del mar.",
+              "image": 4
+            }
           ],
           "specifications": {
             "title": "Especificaciones técnicas",
             "image": 5,
             "items": [
-              { "label": "Referencia", "value": "4410J-001" },
-              { "label": "Caja", "value": "Oro amarillo de 18 quilates" },
-              { "label": "Diámetro", "value": "38 mm" },
-              { "label": "Espesor", "value": "9,2 mm" },
-              { "label": "Hermeticidad", "value": "30 m" },
-              { "label": "Calibre", "value": "A-180 L, automático" },
-              { "label": "Reserva de marcha", "value": "50 horas" },
-              { "label": "Frecuencia", "value": "28.800 a/h (4 Hz)" },
-              { "label": "Funciones", "value": "Horas, minutos, segundero pequeño, fases lunares" },
-              { "label": "Esfera", "value": "Aventurina azul" }
+              {
+                "label": "Referencia",
+                "value": "124060"
+              },
+              {
+                "label": "Caja",
+                "value": "Oyster, 41 mm, acero Oystersteel"
+              },
+              {
+                "label": "Bisel",
+                "value": "Giratorio unidireccional graduado 60 minutos, disco Cerachrom negro"
+              },
+              {
+                "label": "Hermeticidad",
+                "value": "300 m / 1.000 pies"
+              },
+              {
+                "label": "Calibre",
+                "value": "3230, perpetual, carga automática"
+              },
+              {
+                "label": "Precisión",
+                "value": "−2/+2 s/día tras el encajado"
+              },
+              {
+                "label": "Reserva de marcha",
+                "value": "Aprox. 70 horas"
+              },
+              {
+                "label": "Funciones",
+                "value": "Horas, minutos, segundero central"
+              },
+              {
+                "label": "Esfera",
+                "value": "Negra, índices Chromalight"
+              },
+              {
+                "label": "Brazalete",
+                "value": "Oyster, cierre Oysterlock con sistema de extensión Glidelock"
+              },
+              {
+                "label": "Cristal",
+                "value": "Zafiro resistente a las rayaduras"
+              }
+            ]
+          }
+        },
+        {
+          "id": "submariner-date-verde",
+          "name": "Submariner Date · Verde",
+          "collection": "Submariner",
+          "reference": "Ref. 116610LV",
+          "palette": {
+            "dial": "#0f6b2f",
+            "metal": "steel",
+            "strap": "bracelet"
+          },
+          "images": [
+            "assets/rolex/submariner-date-verde/01.webp",
+            "assets/rolex/submariner-date-verde/02.webp",
+            "assets/rolex/submariner-date-verde/03.webp",
+            "assets/rolex/submariner-date-verde/04.webp",
+            "assets/rolex/submariner-date-verde/05.webp",
+            "assets/rolex/submariner-date-verde/06.webp"
+          ],
+          "sections": [
+            {
+              "id": "presentacion",
+              "eyebrow": "Presentación",
+              "title": "Submariner Date",
+              "text": "Verde, el color emblemático de Rolex, sobre esfera y bisel. Una edición que se convirtió en leyenda entre los coleccionistas.",
+              "image": 0
+            },
+            {
+              "id": "esfera",
+              "eyebrow": "La esfera",
+              "title": "Verde rayos de sol",
+              "text": "Una esfera verde con acabado rayos de sol que pasa del esmeralda al verde profundo según la luz, con índices luminiscentes rodeados de oro blanco.",
+              "image": 1
+            },
+            {
+              "id": "caja",
+              "eyebrow": "El bisel",
+              "title": "Cerachrom verde",
+              "text": "El disco del bisel, de cerámica Cerachrom, es prácticamente inalterable: no se raya, no pierde color con el sol ni con el agua salada. Sus graduaciones están recubiertas de platino.",
+              "image": 2
+            },
+            {
+              "id": "movimiento",
+              "eyebrow": "El movimiento",
+              "title": "Calibre 3135",
+              "text": "Un movimiento legendario, reconocido por su fiabilidad, con espiral Parachrom azul y certificado Cronómetro Superlativo.",
+              "image": 3
+            },
+            {
+              "id": "malla",
+              "eyebrow": "El brazalete",
+              "title": "Brazalete Oyster",
+              "text": "Acero Oystersteel con eslabones satinados, cierre Oysterlock y extensión Glidelock de ajuste fino cada 2 mm.",
+              "image": 4
+            }
+          ],
+          "specifications": {
+            "title": "Especificaciones técnicas",
+            "image": 5,
+            "items": [
+              {
+                "label": "Referencia",
+                "value": "116610LV"
+              },
+              {
+                "label": "Caja",
+                "value": "Oyster, 40 mm, acero Oystersteel"
+              },
+              {
+                "label": "Bisel",
+                "value": "Giratorio unidireccional graduado 60 minutos, disco Cerachrom verde"
+              },
+              {
+                "label": "Hermeticidad",
+                "value": "300 m / 1.000 pies"
+              },
+              {
+                "label": "Calibre",
+                "value": "3135, perpetual, carga automática"
+              },
+              {
+                "label": "Precisión",
+                "value": "−2/+2 s/día tras el encajado"
+              },
+              {
+                "label": "Reserva de marcha",
+                "value": "Aprox. 48 horas"
+              },
+              {
+                "label": "Funciones",
+                "value": "Horas, minutos, segundero central, fecha"
+              },
+              {
+                "label": "Esfera",
+                "value": "Verde rayos de sol, índices Chromalight"
+              },
+              {
+                "label": "Brazalete",
+                "value": "Oyster, cierre Oysterlock con sistema de extensión Glidelock"
+              },
+              {
+                "label": "Cristal",
+                "value": "Zafiro con lente Cyclops sobre la fecha"
+              }
             ]
           }
         }
       ]
     },
     {
-      "id": "valmont",
-      "name": "Valmont & Fils",
-      "short": "VALMONT",
+      "id": "patek-philippe",
+      "name": "Patek Philippe",
+      "short": "PATEK PHILIPPE",
+      "origin": "Ginebra",
+      "founded": 1839,
+      "logo": "assets/patek-philippe/logo.svg",
+      "intro": {
+        "video": "assets/patek-philippe/intro.mp4",
+        "poster": "assets/patek-philippe/intro-poster.webp"
+      },
+      "description": "Manufactura ginebrina independiente desde 1839.",
+      "models": []
+    },
+    {
+      "id": "audemars-piguet",
+      "name": "Audemars Piguet",
+      "short": "AUDEMARS PIGUET",
       "origin": "Le Brassus",
-      "founded": 1891,
-      "logo": "assets/valmont/logo.svg",
+      "founded": 1875,
+      "logo": "assets/audemars-piguet/logo.svg",
       "intro": {
-        "video": "assets/valmont/intro.mp4",
-        "poster": "assets/valmont/intro-poster.webp"
+        "video": "assets/audemars-piguet/intro.mp4",
+        "poster": "assets/audemars-piguet/intro-poster.webp"
       },
-      "description": "En lo alto del Valle de Joux, Valmont & Fils une desde 1891 la tradición relojera del Jura con un espíritu de exploración. Relojes concebidos para el mar, el viaje y la velocidad.",
-      "models": [
-        {
-          "id": "abysse-300",
-          "name": "Abysse 300",
-          "collection": "Océanique",
-          "reference": "Ref. 300.11",
-          "palette": { "dial": "#0b2a2a", "metal": "steel", "strap": "bracelet" },
-          "images": [
-            "assets/valmont/abysse-300/01.webp",
-            "assets/valmont/abysse-300/02.webp",
-            "assets/valmont/abysse-300/03.webp",
-            "assets/valmont/abysse-300/04.webp",
-            "assets/valmont/abysse-300/05.webp",
-            "assets/valmont/abysse-300/06.webp"
-          ],
-          "sections": [
-            { "id": "presentacion", "eyebrow": "Presentación", "title": "Abysse 300", "text": "Nacido para las profundidades, pensado para la superficie. El Abysse 300 es un reloj de buceo profesional con la discreción de un reloj de ciudad.", "image": 0 },
-            { "id": "esfera", "eyebrow": "La esfera", "title": "Petróleo profundo", "text": "Esfera degradé que pasa del verde petróleo al negro en los bordes, como el agua a medida que se desciende. Índices recubiertos de material luminiscente de larga duración.", "image": 1 },
-            { "id": "caja", "eyebrow": "La caja", "title": "Acero 904L, 41 mm", "text": "Bisel giratorio unidireccional con inserto cerámico graduado y corona atornillada con triple junta. Hermético hasta 300 metros.", "image": 2 },
-            { "id": "movimiento", "eyebrow": "El movimiento", "title": "Calibre V-3000", "text": "Movimiento automático certificado cronómetro, con espiral antimagnética de silicio y una reserva de marcha de 70 horas.", "image": 3 },
-            { "id": "malla", "eyebrow": "El brazalete", "title": "Brazalete de tres eslabones", "text": "Acero satinado con sistema de extensión rápida de 5 mm, para llevarlo sobre un traje de neopreno o ajustarlo a la muñeca en un día de calor.", "image": 4 }
-          ],
-          "specifications": {
-            "title": "Especificaciones técnicas",
-            "image": 5,
-            "items": [
-              { "label": "Referencia", "value": "300.11.41" },
-              { "label": "Caja", "value": "Acero inoxidable 904L" },
-              { "label": "Diámetro", "value": "41 mm" },
-              { "label": "Espesor", "value": "12,5 mm" },
-              { "label": "Hermeticidad", "value": "300 m" },
-              { "label": "Calibre", "value": "V-3000, automático" },
-              { "label": "Reserva de marcha", "value": "70 horas" },
-              { "label": "Frecuencia", "value": "28.800 a/h (4 Hz)" },
-              { "label": "Funciones", "value": "Horas, minutos, segundos, fecha" },
-              { "label": "Bisel", "value": "Giratorio unidireccional, cerámica" }
-            ]
-          }
-        },
-        {
-          "id": "regate-cronografo",
-          "name": "Régate Cronógrafo",
-          "collection": "Régate",
-          "reference": "Ref. 1891C",
-          "palette": { "dial": "#e9e6df", "metal": "steel", "strap": "bracelet" },
-          "images": [
-            "assets/valmont/regate-cronografo/01.webp",
-            "assets/valmont/regate-cronografo/02.webp",
-            "assets/valmont/regate-cronografo/03.webp",
-            "assets/valmont/regate-cronografo/04.webp",
-            "assets/valmont/regate-cronografo/05.webp",
-            "assets/valmont/regate-cronografo/06.webp"
-          ],
-          "sections": [
-            { "id": "presentacion", "eyebrow": "Presentación", "title": "Régate Cronógrafo", "text": "Un homenaje a las regatas del lago de Ginebra. Cada segundo cuenta en la línea de salida, y el Régate los mide todos con la precisión de un instrumento náutico.", "image": 0 },
-            { "id": "esfera", "eyebrow": "La esfera", "title": "Blanco y contrastes", "text": "Esfera lacada blanca con contadores negros, una combinación pensada para leerse de un vistazo bajo el sol del mediodía.", "image": 1 },
-            { "id": "caja", "eyebrow": "La caja", "title": "Acero con pulsadores de seta", "text": "Caja de 40 mm con pulsadores tipo seta que se accionan con un clic firme y preciso, incluso con guantes de navegación.", "image": 2 },
-            { "id": "movimiento", "eyebrow": "El movimiento", "title": "Calibre V-1891 de rueda de pilares", "text": "Cronógrafo con rueda de pilares y embrague vertical: el arranque del cronómetro es instantáneo, sin el más mínimo salto de aguja.", "image": 3 },
-            { "id": "malla", "eyebrow": "El brazalete", "title": "Eslabones pulidos y satinados", "text": "Un brazalete de acero que alterna superficies pulidas y satinadas, rematado con un cierre de seguridad con el emblema de la casa.", "image": 4 }
-          ],
-          "specifications": {
-            "title": "Especificaciones técnicas",
-            "image": 5,
-            "items": [
-              { "label": "Referencia", "value": "1891C.40.01" },
-              { "label": "Caja", "value": "Acero inoxidable" },
-              { "label": "Diámetro", "value": "40 mm" },
-              { "label": "Espesor", "value": "12,2 mm" },
-              { "label": "Hermeticidad", "value": "100 m" },
-              { "label": "Calibre", "value": "V-1891, cronógrafo automático" },
-              { "label": "Reserva de marcha", "value": "72 horas" },
-              { "label": "Frecuencia", "value": "28.800 a/h (4 Hz)" },
-              { "label": "Funciones", "value": "Horas, minutos, cronógrafo, taquímetro" },
-              { "label": "Cristal", "value": "Zafiro abombado" }
-            ]
-          }
-        },
-        {
-          "id": "ultraplano-39",
-          "name": "Ultraplano 39",
-          "collection": "Classique",
-          "reference": "Ref. 39.UP",
-          "palette": { "dial": "#161616", "metal": "gold", "strap": "leather", "strapColor": "#120d0a" },
-          "images": [
-            "assets/valmont/ultraplano-39/01.webp",
-            "assets/valmont/ultraplano-39/02.webp",
-            "assets/valmont/ultraplano-39/03.webp",
-            "assets/valmont/ultraplano-39/04.webp",
-            "assets/valmont/ultraplano-39/05.webp",
-            "assets/valmont/ultraplano-39/06.webp"
-          ],
-          "sections": [
-            { "id": "presentacion", "eyebrow": "Presentación", "title": "Ultraplano 39", "text": "La pureza como desafío técnico. Con apenas 6,3 mm de espesor, el Ultraplano 39 es el reloj más delgado jamás fabricado en Le Brassus por la casa.", "image": 0 },
-            { "id": "esfera", "eyebrow": "La esfera", "title": "Negro absoluto", "text": "Esfera de ónix natural, sin cifras ni fecha. Solo dos agujas de oro amarillo que recorren la piedra como un trazo de tinta.", "image": 1 },
-            { "id": "caja", "eyebrow": "La caja", "title": "Oro amarillo, 6,3 mm", "text": "Una caja de 39 mm cuyo perfil se afina hacia las asas, de modo que el reloj parece flotar sobre la muñeca.", "image": 2 },
-            { "id": "movimiento", "eyebrow": "El movimiento", "title": "Calibre V-120 de cuerda manual", "text": "Apenas 2,1 mm de altura. Un movimiento de cuerda manual cuya platina está decorada con Côtes de Genève y biseles pulidos a mano.", "image": 3 },
-            { "id": "malla", "eyebrow": "La correa", "title": "Becerro negro satinado", "text": "Correa de piel de becerro negra con acabado satinado, cosida al tono y equipada con una hebilla en oro amarillo pulido.", "image": 4 }
-          ],
-          "specifications": {
-            "title": "Especificaciones técnicas",
-            "image": 5,
-            "items": [
-              { "label": "Referencia", "value": "39.UP.J.01" },
-              { "label": "Caja", "value": "Oro amarillo de 18 quilates" },
-              { "label": "Diámetro", "value": "39 mm" },
-              { "label": "Espesor", "value": "6,3 mm" },
-              { "label": "Hermeticidad", "value": "30 m" },
-              { "label": "Calibre", "value": "V-120, cuerda manual" },
-              { "label": "Reserva de marcha", "value": "42 horas" },
-              { "label": "Frecuencia", "value": "21.600 a/h (3 Hz)" },
-              { "label": "Funciones", "value": "Horas, minutos" },
-              { "label": "Esfera", "value": "Ónix natural" }
-            ]
-          }
-        },
-        {
-          "id": "meridien-gmt",
-          "name": "Méridien GMT",
-          "collection": "Voyage",
-          "reference": "Ref. GMT.24",
-          "palette": { "dial": "#24341f", "metal": "titanium", "strap": "bracelet" },
-          "images": [
-            "assets/valmont/meridien-gmt/01.webp",
-            "assets/valmont/meridien-gmt/02.webp",
-            "assets/valmont/meridien-gmt/03.webp",
-            "assets/valmont/meridien-gmt/04.webp",
-            "assets/valmont/meridien-gmt/05.webp",
-            "assets/valmont/meridien-gmt/06.webp"
-          ],
-          "sections": [
-            { "id": "presentacion", "eyebrow": "Presentación", "title": "Méridien GMT", "text": "Dos husos horarios, un solo gesto. El Méridien acompaña al viajero que vive entre aeropuertos sin perder de vista la hora de casa.", "image": 0 },
-            { "id": "esfera", "eyebrow": "La esfera", "title": "Verde bosque", "text": "Esfera verde bosque con acabado granulado y una aguja GMT en rojo lacado que recorre las 24 horas del bisel.", "image": 1 },
-            { "id": "caja", "eyebrow": "La caja", "title": "Titanio grado 5", "text": "Una caja de 40 mm ligera como una pluma, con bisel bidireccional de 24 horas en cerámica y tratamiento antiarañazos.", "image": 2 },
-            { "id": "movimiento", "eyebrow": "El movimiento", "title": "Calibre V-2400 GMT", "text": "Aguja horaria local ajustable de forma independiente, sin detener el reloj. Una función pensada para cambiar de continente sin perder un segundo.", "image": 3 },
-            { "id": "malla", "eyebrow": "El brazalete", "title": "Titanio satinado", "text": "Brazalete de titanio satinado con eslabones de perfil plano y un cierre desplegable con ajuste fino sin herramientas.", "image": 4 }
-          ],
-          "specifications": {
-            "title": "Especificaciones técnicas",
-            "image": 5,
-            "items": [
-              { "label": "Referencia", "value": "GMT.24.40.T" },
-              { "label": "Caja", "value": "Titanio grado 5" },
-              { "label": "Diámetro", "value": "40 mm" },
-              { "label": "Espesor", "value": "11,8 mm" },
-              { "label": "Hermeticidad", "value": "100 m" },
-              { "label": "Calibre", "value": "V-2400 GMT, automático" },
-              { "label": "Reserva de marcha", "value": "65 horas" },
-              { "label": "Frecuencia", "value": "28.800 a/h (4 Hz)" },
-              { "label": "Funciones", "value": "Horas, minutos, segundos, segundo huso horario, fecha" },
-              { "label": "Bisel", "value": "Bidireccional 24 h, cerámica" }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "kessler",
-      "name": "Kessler Glashütte",
-      "short": "KESSLER",
-      "origin": "Glashütte",
-      "founded": 1902,
-      "logo": "assets/kessler/logo.svg",
-      "intro": {
-        "video": "assets/kessler/intro.mp4",
-        "poster": "assets/kessler/intro-poster.webp"
-      },
-      "description": "Precisión sajona desde 1902.",
+      "description": "Manufactura del Valle de Joux desde 1875.",
       "models": []
     }
   ]
