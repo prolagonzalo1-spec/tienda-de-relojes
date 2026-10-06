@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luxury Time</title>
+  <meta name="description" content="Luxury Time — boutique de alta relojería. Una experiencia visual.">
+  <meta name="theme-color" content="#070707">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23070707'/%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%23b8975a' stroke-width='1.5'/%3E%3Cpath d='M32 18v14l9 6' stroke='%23ece6da' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#app">Saltar al contenido</a>
+
+  <header class="site-header" data-state="hidden">
+    <div class="sh-left">
+      <a class="sh-back" href="#/" hidden>
+        <span class="sh-arrow" aria-hidden="true"></span>
+        <span class="sh-back-label">Marcas</span>
+      </a>
+    </div>
+    <a class="sh-logo" href="#/" aria-label="Luxury Time, inicio">LUXURY TIME</a>
+    <div class="sh-right"><span class="sh-context"></span></div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <!-- Formulario de cita en boutique (no envía datos) -->
+  <div class="modal" id="appointment" role="dialog" aria-modal="true" aria-labelledby="appt-title" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" type="button" data-close aria-label="Cerrar"></button>
+
+      <div class="modal-view" data-view="form">
+        <p class="eyebrow">Boutique Luxury Time</p>
+        <h2 class="modal-title" id="appt-title">Solicitar cita</h2>
+        <p class="modal-sub">Descubra <span data-model-name></span> en un salón privado, acompañado por uno de nuestros asesores.</p>
+        <form class="appt-form" novalidate>
+          <label class="field">
+            <span class="field-label">Nombre y apellido</span>
+            <input type="text" name="nombre" autocomplete="name" required minlength="2">
+          </label>
+          <label class="field">
+            <span class="field-label">Correo electrónico</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label class="field">
+            <span class="field-label">Fecha preferida</span>
+            <input type="date" name="fecha" required>
+          </label>
+          <p class="form-error" role="alert" hidden>Por favor, complete todos los campos correctamente.</p>
+          <button class="btn btn-solid" type="submit">Confirmar solicitud</button>
+        </form>
+      </div>
+
+      <div class="modal-view" data-view="done" hidden>
+        <span class="done-mark" aria-hidden="true"></span>
+        <p class="eyebrow">Solicitud recibida</p>
+        <h2 class="modal-title" tabindex="-1">Gracias, <span data-done-name></span></h2>
+        <p class="modal-sub">Le esperamos el <span data-done-date></span> para presentarle <span data-model-name></span>. Un asesor confirmará su visita a <span data-done-email></span>.</p>
+        <button class="btn btn-ghost" type="button" data-close>Volver al modelo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="veil" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/placeholder.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
