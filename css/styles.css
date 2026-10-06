@@ -40,7 +40,7 @@
   --track-wordmark: 0.3em;    /* LUXURY TIME */
 
   --gutter: clamp(1rem, 4vw, 4rem);
-  --header-h: 100px;
+  --header-h: 120px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -249,7 +249,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .site-header[data-state="minimal"] .sh-logo { gap: 0; }
 
 .sh-logo {
-  --em-size: 64px;
+  --em-size: 88px;
   display: inline-flex; align-items: center; gap: 0.9rem;
   color: var(--text);
 }
@@ -306,11 +306,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 [data-theme="light"] .theme-toggle .tt-moon { display: none; }
 
 @media (max-width: 700px) {
-  :root { --header-h: 80px; }
+  :root { --header-h: 88px; }
   .theme-toggle .tt-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .theme-toggle { padding: 0.6rem; margin-right: -0.6rem; }
   .sh-back-label, .sh-context { display: none; }
-  .sh-logo { --em-size: 48px; gap: 0.65rem; }
+  .sh-logo { --em-size: 60px; gap: 0.65rem; }
   .sh-wordmark { font-size: 0.95rem; letter-spacing: 0.26em; margin-right: -0.26em; white-space: nowrap; }
 }
 
