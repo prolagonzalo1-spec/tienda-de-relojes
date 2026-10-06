@@ -390,12 +390,15 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .home-tagline {
+  /* Como en el logo completo: ciudad y año en mayúsculas espaciadas, en gris */
   margin: 0;
   font-family: var(--serif);
-  font-style: italic;
   font-weight: var(--serif-light);
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
-  color: var(--text-soft);
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  letter-spacing: var(--track-wordmark);
+  margin-right: calc(-1 * var(--track-wordmark));
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 .brand-picker { width: 100%; max-width: 1200px; margin: 0 auto; }

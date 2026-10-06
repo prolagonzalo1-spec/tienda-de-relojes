@@ -1,9 +1,9 @@
 {
   "site": {
     "name": "LUXURY TIME",
-    "tagline": "El tiempo, en su forma más pura.",
+    "tagline": "Buenos Aires · Desde 1987",
     "eyebrow": "Haute Horlogerie",
-    "footer": "Proyecto académico sin fines comerciales. Las marcas, nombres e imágenes pertenecen a sus respectivos titulares.",
+    "footer": "Luxury Time · Proyecto académico ficticio. Imágenes obtenidas de Pinterest con fines educativos.",
     "clock": {
       "source": "api",
       "_opciones": "browser = hora del navegador (zona America/Argentina/Buenos_Aires) · api = TimeAPI.io cada 5 min, con fallback al navegador"
@@ -21,7 +21,7 @@
         "video": "assets/rolex/intro.mp4",
         "poster": "assets/rolex/intro-poster.webp"
       },
-      "description": "Fundada en 1905 por Hans Wilsdorf, Rolex creó el primer reloj de pulsera hermético, el Oyster, y convirtió la precisión en una forma de excelencia. La colección Submariner, nacida en 1953, es su homenaje a las profundidades.",
+      "description": "Fundada en 1905 por Hans Wilsdorf, Rolex presentó en 1926 el Oyster, el primer reloj de pulsera hermético. La colección Submariner, presentada en 1953, nació para el buceo profesional.",
       "models": [
         {
           "id": "submariner-date-azul",
@@ -46,7 +46,7 @@
               "id": "presentacion",
               "eyebrow": "Presentación",
               "title": "Submariner Date",
-              "text": "El reloj de buceo por excelencia, en oro blanco de 18 quilates. Una pieza que nació en 1953 para explorar las profundidades y que hoy es una referencia absoluta de la relojería.",
+              "text": "Un reloj de buceo en oro blanco de 18 quilates. Su linaje comienza en 1953, con el primer Submariner, concebido para explorar las profundidades.",
               "image": 0
             },
             {
@@ -60,7 +60,7 @@
               "id": "caja",
               "eyebrow": "La caja",
               "title": "Oyster, hermética hasta 300 metros",
-              "text": "La caja Oyster de 41 mm, con fondo atornillado y corona Triplock de triple junta, protege el movimiento como un verdadero submarino en miniatura.",
+              "text": "La caja Oyster de 41 mm, con fondo atornillado y corona Triplock de triple junta, protege el movimiento del agua, del polvo y de la presión.",
               "image": 2
             },
             {
@@ -100,7 +100,7 @@
               },
               {
                 "label": "Calibre",
-                "value": "3235, perpetual, carga automática"
+                "value": "3235, rotor Perpetual de carga automática"
               },
               {
                 "label": "Precisión",
@@ -150,7 +150,7 @@
               "id": "presentacion",
               "eyebrow": "Presentación",
               "title": "Submariner Date",
-              "text": "Oro amarillo de 18 quilates y azul real: la versión más luminosa del Submariner. Un reloj profesional que conserva toda su robustez bajo una presencia solar.",
+              "text": "Oro amarillo de 18 quilates y azul real. Un reloj de buceo profesional, con la misma construcción hermética que sus versiones en acero.",
               "image": 0
             },
             {
@@ -178,7 +178,7 @@
               "id": "malla",
               "eyebrow": "El brazalete",
               "title": "Oro amarillo macizo",
-              "text": "Brazalete Oyster en oro amarillo de 18 quilates fundido en la propia fundición de Rolex, con cierre Oysterlock y extensión Glidelock.",
+              "text": "Brazalete Oyster en oro amarillo de 18 quilates, producido en la fundición propia de Rolex, con cierre Oysterlock y extensión Glidelock.",
               "image": 1
             }
           ],
@@ -204,7 +204,7 @@
               },
               {
                 "label": "Calibre",
-                "value": "3235, perpetual, carga automática"
+                "value": "3235, rotor Perpetual de carga automática"
               },
               {
                 "label": "Precisión",
@@ -254,14 +254,14 @@
               "id": "presentacion",
               "eyebrow": "Presentación",
               "title": "Submariner Date",
-              "text": "El contraste más clásico: oro amarillo y negro profundo. Una interpretación sobria y poderosa del icónico reloj de buceo.",
+              "text": "Oro amarillo y negro: un contraste clásico. Una interpretación sobria del reloj de buceo de la casa.",
               "image": 0
             },
             {
               "id": "esfera",
               "eyebrow": "La esfera",
               "title": "Negro laqueado",
-              "text": "Esfera negra laqueada con índices de oro y agujas Mercedes, perfectamente legibles bajo el agua y en la penumbra.",
+              "text": "Esfera negra laqueada con índices de oro y agujas Mercedes, legibles bajo el agua y en la penumbra.",
               "image": 1
             },
             {
@@ -275,7 +275,7 @@
               "id": "movimiento",
               "eyebrow": "El movimiento",
               "title": "Calibre 3235",
-              "text": "Catorce patentes, espiral Parachrom resistente a los campos magnéticos y amortiguadores Paraflex: un movimiento pensado para resistir las condiciones más exigentes.",
+              "text": "Catorce patentes, espiral Parachrom resistente a los campos magnéticos y amortiguadores Paraflex: un movimiento pensado para el uso diario y para el buceo.",
               "image": 3
             },
             {
@@ -308,7 +308,7 @@
               },
               {
                 "label": "Calibre",
-                "value": "3235, perpetual, carga automática"
+                "value": "3235, rotor Perpetual de carga automática"
               },
               {
                 "label": "Precisión",
@@ -360,21 +360,21 @@
               "id": "presentacion",
               "eyebrow": "Presentación",
               "title": "Submariner",
-              "text": "La versión más pura, sin fecha. Fiel al modelo original de 1953, es el Submariner en su expresión más esencial.",
+              "text": "La versión sin fecha. Fiel al modelo original de 1953, conserva la esfera despejada del primer Submariner.",
               "image": 0
             },
             {
               "id": "esfera",
               "eyebrow": "La esfera",
-              "title": "Simetría perfecta",
-              "text": "Sin ventana de fecha ni lente Cyclops, la esfera negra muestra una simetría total: índices geométricos, triángulo a las 12 y agujas Mercedes.",
+              "title": "Simetría",
+              "text": "Sin ventana de fecha ni lente Cyclops, la esfera negra se ordena en torno a su eje: índices geométricos, triángulo a las 12 y agujas Mercedes.",
               "image": 1
             },
             {
               "id": "caja",
               "eyebrow": "La caja",
               "title": "Acero Oystersteel",
-              "text": "La corona Triplock, protegida por los resaltes de la caja, sobresale apenas de un perfil de 41 mm tallado en Oystersteel, una aleación de acero extremadamente resistente a la corrosión.",
+              "text": "La corona Triplock, protegida por los resaltes de la caja, apenas sobresale de un perfil de 41 mm en Oystersteel, una aleación de acero de alta resistencia a la corrosión.",
               "image": 2
             },
             {
@@ -414,7 +414,7 @@
               },
               {
                 "label": "Calibre",
-                "value": "3230, perpetual, carga automática"
+                "value": "3230, rotor Perpetual de carga automática"
               },
               {
                 "label": "Precisión",
@@ -466,7 +466,7 @@
               "id": "presentacion",
               "eyebrow": "Presentación",
               "title": "Submariner Date",
-              "text": "Verde, el color emblemático de Rolex, sobre esfera y bisel. Una edición que se convirtió en leyenda entre los coleccionistas.",
+              "text": "Verde, el color de la casa, sobre esfera y bisel. Una referencia producida entre 2010 y 2020, hoy muy buscada por los coleccionistas.",
               "image": 0
             },
             {
@@ -480,14 +480,14 @@
               "id": "caja",
               "eyebrow": "El bisel",
               "title": "Cerachrom verde",
-              "text": "El disco del bisel, de cerámica Cerachrom, es prácticamente inalterable: no se raya, no pierde color con el sol ni con el agua salada. Sus graduaciones están recubiertas de platino.",
+              "text": "El disco del bisel, de cerámica Cerachrom, resiste las rayaduras y conserva su color frente al sol y al agua salada. Sus graduaciones están recubiertas de platino.",
               "image": 2
             },
             {
               "id": "movimiento",
               "eyebrow": "El movimiento",
               "title": "Calibre 3135",
-              "text": "Un movimiento legendario, reconocido por su fiabilidad, con espiral Parachrom azul y certificado Cronómetro Superlativo.",
+              "text": "Calibre de carga automática producido desde 1988, con espiral Parachrom azul y certificación Cronómetro Superlativo.",
               "image": 3
             },
             {
@@ -520,7 +520,7 @@
               },
               {
                 "label": "Calibre",
-                "value": "3135, perpetual, carga automática"
+                "value": "3135, rotor Perpetual de carga automática"
               },
               {
                 "label": "Precisión",

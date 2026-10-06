@@ -107,7 +107,7 @@
     var markColor = light ? p.m[2] : p.m[0];
 
     // sombra
-    s += '<ellipse cx="' + cx + '" cy="' + (cy + 40) + '" rx="210" ry="220" fill="#000" opacity="0.7" filter="url(#sh' + id + ')"/>';
+    s += '<ellipse cx="' + cx + '" cy="' + (cy + 40) + '" rx="210" ry="220" fill="#161613" opacity="0.7" filter="url(#sh' + id + ')"/>';
     s += strapFront(p, id, cx, cy);
 
     // asas
@@ -169,7 +169,7 @@
   function watchCase(p, id) {
     var s = '';
     var cx = 400, cy = 500;
-    s += '<ellipse cx="' + cx + '" cy="' + (cy + 110) + '" rx="300" ry="40" fill="#000" opacity="0.8" filter="url(#sh' + id + ')"/>';
+    s += '<ellipse cx="' + cx + '" cy="' + (cy + 110) + '" rx="300" ry="40" fill="#161613" opacity="0.8" filter="url(#sh' + id + ')"/>';
     // correa
     if (p.strap === 'bracelet') {
       for (var j = 0; j < 4; j++) {
@@ -207,7 +207,7 @@
     var s = '', cx = 400, cy = 500;
     var plate = shade(p.m[1], -0.55);
     var bridge = p.m[1];
-    s += '<ellipse cx="' + cx + '" cy="' + (cy + 30) + '" rx="260" ry="260" fill="#000" opacity="0.8" filter="url(#sh' + id + ')"/>';
+    s += '<ellipse cx="' + cx + '" cy="' + (cy + 30) + '" rx="260" ry="260" fill="#161613" opacity="0.8" filter="url(#sh' + id + ')"/>';
     s += '<circle cx="' + cx + '" cy="' + cy + '" r="250" fill="url(#mt' + id + ')"/>';
     s += '<circle cx="' + cx + '" cy="' + cy + '" r="236" fill="' + plate + '"/>';
     // perlado
@@ -255,7 +255,7 @@
   function watchBracelet(p, id) {
     var s = '', cx = 400;
     s += '<g transform="rotate(-14 400 500)">';
-    s += '<rect x="' + (cx - 110) + '" y="-80" width="220" height="1160" fill="#000" opacity="0.6" filter="url(#sh' + id + ')"/>';
+    s += '<rect x="' + (cx - 110) + '" y="-80" width="220" height="1160" fill="#161613" opacity="0.6" filter="url(#sh' + id + ')"/>';
     if (p.strap === 'bracelet') {
       for (var j = 0; j < 17; j++) {
         var y = -60 + j * 68;
@@ -274,14 +274,14 @@
       for (var r = 0; r < 26; r++) {
         for (var c = 0; c < 4; c++) {
           var w = 30 + ((r * 7 + c * 13) % 14);
-          s += '<rect x="' + (cx - 78 + c * 40) + '" y="' + (-70 + r * 44) + '" width="' + w + '" height="38" rx="6" fill="none" stroke="#000" stroke-opacity="0.35"/>';
+          s += '<rect x="' + (cx - 78 + c * 40) + '" y="' + (-70 + r * 44) + '" width="' + w + '" height="38" rx="6" fill="none" stroke="#161613" stroke-opacity="0.35"/>';
         }
       }
       s += '<path d="M' + (cx - 78) + ' -80V1080M' + (cx + 78) + ' -80V1080" stroke="' + shade(p.strapColor, 0.4) + '" stroke-width="1.4" stroke-dasharray="7 6" opacity="0.6"/>';
       // hebilla y agujeros
       s += '<rect x="' + (cx - 110) + '" y="430" width="220" height="120" rx="34" fill="none" stroke="url(#mt' + id + ')" stroke-width="14"/>';
       s += '<rect x="' + (cx - 6) + '" y="430" width="12" height="160" rx="6" fill="url(#mr' + id + ')"/>';
-      for (var hle = 0; hle < 4; hle++) s += '<circle cx="' + cx + '" cy="' + (680 + hle * 70) + '" r="7" fill="#000" opacity="0.7"/>';
+      for (var hle = 0; hle < 4; hle++) s += '<circle cx="' + cx + '" cy="' + (680 + hle * 70) + '" r="7" fill="#161613" opacity="0.7"/>';
     }
     s += '</g>';
     return s;

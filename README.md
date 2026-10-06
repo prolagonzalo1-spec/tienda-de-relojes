@@ -4,7 +4,7 @@ Boutique de alta relojería: una experiencia visual, sin venta.
 Sitio 100 % estático (HTML, CSS y JavaScript) pensado para GitHub Pages, con animaciones de
 [GSAP](https://gsap.com/) + ScrollTrigger.
 
-> Proyecto académico sin fines comerciales. Las marcas, nombres e imágenes pertenecen a sus respectivos titulares.
+> Luxury Time · Proyecto académico ficticio. Imágenes obtenidas de Pinterest con fines educativos.
 
 ## Flujo
 
@@ -33,7 +33,7 @@ Todo el contenido sale de `data.json`; para agregar marcas o modelos no hace fal
 
 ```jsonc
 {
-  "site": { "name", "tagline", "eyebrow", "footer" },
+  "site": { "name", "tagline", "eyebrow", "footer", "clock": { "source": "browser" | "api" } },
   "brands": [
     {
       "id": "rolex",                   // se usa en la URL y en la carpeta de assets
@@ -103,13 +103,70 @@ Sugerencias: fotos verticales 4:5 (por ejemplo 1600×2000) en WebP sobre fondo o
 ## Estructura
 
 ```
-index.html          Estructura base, cabecera y formulario de cita
-css/styles.css      Estilos (paleta, tipografías, layout responsive)
-js/app.js           Router por hash, vistas y animaciones GSAP
+index.html          Estructura base, cabecera, selector de tema y formulario de cita
+css/styles.css      Tokens de marca (color y tipografía), temas y estilos
+js/app.js           Router por hash, vistas, animaciones GSAP y tema
+js/emblem.js        Emblema LT = reloj en vivo con la hora de Buenos Aires (+ favicon)
 js/placeholder.js   Generador de relojes SVG para imágenes faltantes
 data.json           Marcas, modelos, textos y rutas de imágenes
-assets/             Logos, videos e imágenes
+assets/brand/       Logo y emblema de Luxury Time (PNG, noche y claro)
+assets/             Logos de marca, videos e imágenes
 ```
 
-Tipografías: Cormorant Garamond (títulos) e Inter Light (texto), desde Google Fonts.
+## Sistema de marca
+
+### Color: tokens y dos modos
+
+Todos los colores son custom properties en `css/styles.css`. El tema lo controla `data-theme` en `<html>`
+(`night` por defecto, `light`); la elección se guarda en `localStorage` (`lt-theme`).
+
+| Token | Noche | Claro |
+|---|---|---|
+| `--bg` | `#20201C` grafito cálido | `#FBF8F1` marfil |
+| `--surface` | `#2A2A24` | `#FFFFFF` |
+| `--text` | `#F4F1EA` hueso | `#1A1714` tinta |
+| `--text-muted` | `#968F86` | `#6B6459` |
+| `--gold` | `#C5A465` | `#8B6E2E` oro profundo (texto, líneas, íconos) |
+| `--gold-fill` | `#C5A465` | `#C5A465` (solo rellenos) |
+| `--line` | `rgba(197,164,101,.30)` | `rgba(156,124,52,.30)` |
+
+- `--text-muted` de noche y `--gold` de claro están ajustados para cumplir WCAG AA (≥ 4,5:1).
+- El oro es acento: subraya, no llena.
+- La intro y la ficha de modelo son el "teatro" de la marca: marcan `data-surface="stage"` y se ven siempre en noche.
+- Sin negro puro: el tono más profundo es `#1A1A17`.
+
+### Emblema LT (reloj en vivo)
+
+`js/emblem.js` dibuja el emblema como SVG inline (header, pie y pantalla de carga) y mueve las agujas con la hora de
+Buenos Aires. Los colores salen de los tokens del tema. Cualquier elemento con `data-lt-emblem` se convierte en emblema
+(`data-seconds` agrega segundero) y `data-lt-digital` muestra la hora HH:MM. El favicon es el mismo emblema con la hora
+actual.
+
+Fuente de hora (`data.json` → `site.clock.source`):
+
+- `"browser"`: `Intl.DateTimeFormat` con zona `America/Argentina/Buenos_Aires`.
+- `"api"`: [TimeAPI.io](https://timeapi.io), sincroniza cada 5 min e interpola; si falla, vuelve al navegador.
+  En la consola, `LTEmblem.getState()` indica la fuente activa.
+
+Usos: tamaño mínimo 24 px; área de protección igual a la altura de la "L"; no deformar, no rotar (salvo las agujas),
+no recolorear fuera de la paleta.
+
+### Tipografía
+
+Dos familias, nunca una tercera: **Cormorant Garamond** (300/500) para títulos, logo y cifras destacadas;
+**Inter** (300/400/500) para texto, etiquetas y datos. Etiquetas de sección: Inter, MAYÚSCULAS, tracking 0.28em, oro.
+
+### Tono de voz
+
+Español, de usted, sobrio y preciso; sin superlativos vacíos. Términos en otro idioma solo si nombran el oficio
+(*haute horlogerie*, *savoir-faire*, *maison*) o el origen del reloj.
+
+| Usar | Evitar |
+|---|---|
+| pieza, colección | producto |
+| boutique, maison, casa | local, tienda, negocio |
+| cita | turno |
+| le esperamos, le invitamos | te esperamos |
+| presentar, descubrir | vender, ofertar |
+
 Se respeta `prefers-reduced-motion`.
