@@ -411,7 +411,6 @@
           '<h1 class="catalog-title">' + esc(brand.name) + '</h1>' +
           '<p class="catalog-desc">' + esc(brand.description) + '</p>' +
           '<p class="eyebrow catalog-count">' + n + (n === 1 ? ' modelo' : ' modelos') + '</p>' +
-          '<span class="scroll-cue" aria-hidden="true"></span>' +
         '</header>' +
         '<ul class="model-grid" role="list">' + cards + '</ul>' +
       '</section>' +
@@ -422,8 +421,7 @@
         .from('.catalog-logo', { autoAlpha: 0, scale: 0.92, duration: 2 })
         .from('.ch-eyebrow', { autoAlpha: 0, y: 12, duration: 1.6 }, '-=1.5')
         .from('.catalog-title', { autoAlpha: 0, y: 40, duration: 2 }, '-=1.3')
-        .from('.catalog-desc, .catalog-count', { autoAlpha: 0, y: 20, duration: 1.8, stagger: 0.15 }, '-=1.4')
-        .from('.scroll-cue', { autoAlpha: 0, duration: 1.2 }, '-=0.8');
+        .from('.catalog-desc, .catalog-count', { autoAlpha: 0, y: 20, duration: 1.8, stagger: 0.15 }, '-=1.4');
 
       gsap.set('.model-card', { autoAlpha: 0, y: 70 });
       ScrollTrigger.batch('.model-card', {
@@ -497,8 +495,10 @@
         : '<h2 class="ms-title reveal">' + esc(s.title) + '</h2>';
       return '<section class="ms' + (first ? ' ms-first' : '') + '" id="' + esc(s.id) + '" data-step="' + i + '">' +
         '<div class="ms-inner">' +
-          '<p class="eyebrow reveal"><span class="num">' + pad(i + 1) + '</span>' + esc(first ? model.collection : s.eyebrow) + '</p>' +
-          heading +
+          '<div class="ms-head">' +
+            '<p class="eyebrow reveal"><span class="num">' + pad(i + 1) + '</span>' + esc(first ? model.collection : s.eyebrow) + '</p>' +
+            heading +
+          '</div>' +
           '<p class="ms-text reveal">' + esc(s.text) + '</p>' +
           (first ? '<p class="ms-ref reveal">' + esc(model.reference) + '</p><p class="ms-hint reveal" aria-hidden="true">Desplazarse</p>' : '') +
         '</div>' +
@@ -508,8 +508,10 @@
     var specsHTML =
       '<section class="ms ms-specs" id="especificaciones" data-step="' + (steps.length - 1) + '">' +
         '<div class="ms-inner">' +
-          '<p class="eyebrow reveal"><span class="num">' + pad(steps.length) + '</span>Especificaciones</p>' +
-          '<h2 class="ms-title reveal">' + esc(specs.title || 'Especificaciones técnicas') + '</h2>' +
+          '<div class="ms-head">' +
+            '<p class="eyebrow reveal"><span class="num">' + pad(steps.length) + '</span>Especificaciones</p>' +
+            '<h2 class="ms-title reveal">' + esc(specs.title || 'Especificaciones técnicas') + '</h2>' +
+          '</div>' +
           '<dl class="specs">' + (specs.items || []).map(function (it) {
             return '<div class="spec reveal-spec"><dt>' + esc(it.label) + '</dt><dd>' + esc(it.value) + '</dd></div>';
           }).join('') + '</dl>' +
@@ -574,14 +576,20 @@
 
     animate(function () {
       var mobile = window.matchMedia('(max-width: 900px)').matches;
-      var line = mobile ? '72%' : '55%';
-
-      gsap.utils.toArray('.ms').forEach(function (sec) {
+      var mv = app.querySelector('.mv');
+      var sections = gsap.utils.toArray('.ms');
+      sections.forEach(function (sec, idx) {
         var step = Number(sec.dataset.step);
+        var head = (sections[idx - 1] || sec).querySelector('.ms-head');
+        // En mobile el encabezado de cada sección queda fijo debajo de la imagen. La imagen cambia
+        // justo cuando la sección nueva empieza a empujar al encabezado anterior (por eso se usa
+        // la altura del encabezado anterior): así el título de la sección activa siempre se ve completo.
+        var line = function () { return mobile ? (mv.offsetHeight + head.offsetHeight) + 'px' : '55%'; };
         ScrollTrigger.create({
           trigger: sec,
-          start: 'top ' + line,
-          end: 'bottom ' + line,
+          start: function () { return 'top ' + line(); },
+          end: function () { return 'bottom ' + line(); },
+          invalidateOnRefresh: true,
           onToggle: function (self) { if (self.isActive) activate(step); }
         });
 
