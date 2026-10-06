@@ -124,19 +124,72 @@
 
   var lastMinute = -1;
 
+  /* ---------- Giro (pantalla de carga) ----------
+     Mientras carga, las agujas giran rápido: a la hora real se le suma un
+     desfase que crece. Al terminar, cada desfase desacelera hasta la vuelta
+     completa siguiente, así las agujas se detienen exactamente en la hora real. */
+
+  var SPIN_SPEED = { hour: 360 / 4200, min: 360 / 1100, sec: 360 / 700 };   // grados por ms
+  var spins = [];   // { svg, off:{hour,min,sec}, last, settle:null|{t0,dur,from,to,resolve} }
+
+  function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
+
+  function svgOf(el) { return el && (el.tagName && el.tagName.toLowerCase() === 'svg' ? el : el.querySelector('svg.lt-emblem')); }
+
+  function spin(el) {
+    var svg = svgOf(el); if (!svg) return;
+    for (var i = 0; i < spins.length; i++) if (spins[i].svg === svg) return;
+    spins.push({ svg: svg, off: { hour: 0, min: 0, sec: 0 }, last: performance.now(), settle: null });
+  }
+
+  function settle(el, duration) {
+    var svg = svgOf(el);
+    var st = spins.filter(function (x) { return x.svg === svg; })[0];
+    if (!st) return Promise.resolve();
+    if (st.settle) return st.settle.promise;
+    var to = {};
+    ['hour', 'min', 'sec'].forEach(function (k) {
+      // siguiente vuelta completa, con al menos media vuelta más para que el frenado se note
+      to[k] = Math.ceil((st.off[k] + 180) / 360) * 360;
+    });
+    var resolve; var promise = new Promise(function (r) { resolve = r; });
+    st.settle = { t0: performance.now(), dur: duration || 1400, from: { hour: st.off.hour, min: st.off.min, sec: st.off.sec }, to: to, resolve: resolve, promise: promise };
+    return promise;
+  }
+
+  function spinOffset(svg, now) {
+    for (var i = 0; i < spins.length; i++) {
+      var st = spins[i]; if (st.svg !== svg) continue;
+      if (st.settle) {
+        var k = Math.min(1, (now - st.settle.t0) / st.settle.dur), e = easeOutCubic(k), z = st.settle;
+        st.off = { hour: z.from.hour + (z.to.hour - z.from.hour) * e, min: z.from.min + (z.to.min - z.from.min) * e, sec: z.from.sec + (z.to.sec - z.from.sec) * e };
+        if (k >= 1) { spins.splice(i, 1); z.resolve(); return null; }
+      } else {
+        var dt = now - st.last;
+        st.off.hour += dt * SPIN_SPEED.hour; st.off.min += dt * SPIN_SPEED.min; st.off.sec += dt * SPIN_SPEED.sec;
+      }
+      st.last = now;
+      return st.off;
+    }
+    return null;
+  }
+
   function render() {
     var t = new Date(currentBaMs());
     var h = t.getUTCHours(), m = t.getUTCMinutes(), s = t.getUTCSeconds(), ms = t.getUTCMilliseconds();
-    var hourRot = 'rotate(' + ((h % 12) * 30 + m * 0.5) + ' 120 120)';
-    var minRot = 'rotate(' + (m * 6 + s * 0.1) + ' 120 120)';
-    var secRot = 'rotate(' + (s * 6 + ms * 0.006) + ' 120 120)';
+    var hourA = (h % 12) * 30 + m * 0.5, minA = m * 6 + s * 0.1, secA = s * 6 + ms * 0.006;
+    var hourRot = 'rotate(' + hourA + ' 120 120)';
+    var minRot = 'rotate(' + minA + ' 120 120)';
+    var secRot = 'rotate(' + secA + ' 120 120)';
+    var now = performance.now();
 
     var svgs = document.querySelectorAll('svg.lt-emblem');
     for (var i = 0; i < svgs.length; i++) {
-      svgs[i].querySelector('.em-hour').setAttribute('transform', hourRot);
-      svgs[i].querySelector('.em-min').setAttribute('transform', minRot);
+      var off = spins.length ? spinOffset(svgs[i], now) : null;
+      svgs[i].querySelector('.em-hour').setAttribute('transform', off ? 'rotate(' + (hourA + off.hour) + ' 120 120)' : hourRot);
+      svgs[i].querySelector('.em-min').setAttribute('transform', off ? 'rotate(' + (minA + off.min) + ' 120 120)' : minRot);
       var sec = svgs[i].querySelector('.em-seconds');
-      if (sec) sec.setAttribute('transform', secRot);
+      if (sec) sec.setAttribute('transform', off ? 'rotate(' + (secA + off.sec) + ' 120 120)' : secRot);
     }
 
     var digital = pad2(h) + ':' + pad2(m);
@@ -207,6 +260,8 @@
 
   window.LTEmblem = {
     mount: mount,
+    spin: spin,
+    settle: settle,
     setSource: setSource,
     getState: function () { return state; },
     markup: svgMarkup

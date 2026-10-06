@@ -179,6 +179,27 @@
     headerContext.textContent = opts.context || '';
   }
 
+  var lastScrollY = 0, scrollTicking = false;
+
+  function onScroll() {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(function () {
+      scrollTicking = false;
+      var y = window.scrollY;
+      header.classList.toggle('is-scrolled', y > 24);
+      if (y > lastScrollY + 6 && y > 160) header.classList.add('is-tucked');
+      else if (y < lastScrollY - 6 || y <= 160) header.classList.remove('is-tucked');
+      lastScrollY = y;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  function resetHeaderScroll() {
+    lastScrollY = 0;
+    header.classList.remove('is-scrolled', 'is-tucked');
+  }
+
   function footerHTML() {
     return '<footer class="site-footer">' +
       '<span class="footer-logo"><span data-lt-emblem aria-hidden="true"></span>' + esc(DATA.site.name) + '</span>' +
@@ -221,6 +242,7 @@
     teardown();
     setStage(false);
     window.scrollTo(0, 0);
+    resetHeaderScroll();
 
     var matched = false;
     for (var i = 0; i < ROUTES.length; i++) {
@@ -231,10 +253,9 @@
 
     bindImages(app);
     if (window.LTEmblem) LTEmblem.mount(app);
-    veil.classList.remove('is-loading');
     if (hasGsap) {
       ScrollTrigger.refresh();
-      gsap.to(veil, { autoAlpha: 0, duration: firstRender ? 1.6 : 1.2, ease: 'power2.inOut', delay: 0.1, overwrite: true });
+      if (!firstRender) gsap.to(veil, { autoAlpha: 0, duration: 1.2, ease: 'power2.inOut', delay: 0.1, overwrite: true });
     }
     if (!firstRender) app.focus({ preventScroll: true });
     firstRender = false;
@@ -442,7 +463,9 @@
       var cover = (model.images || [])[0];
       return '<li class="model-card">' +
         '<a href="#/marca/' + esc(brand.id) + '/' + esc(model.id) + '">' +
-          '<div class="card-media">' + imgTag(cover, model.name, key, 'front', 'loading="' + (i < 2 ? 'eager' : 'lazy') + '"') + '</div>' +
+          '<div class="card-media"><div class="card-window"><div class="card-photo">' +
+            imgTag(cover, model.name, key, 'front', 'loading="' + (i < 2 ? 'eager' : 'lazy') + '"') +
+          '</div></div></div>' +
           '<div class="card-body">' +
             '<p class="eyebrow card-collection">' + esc(model.collection) + '</p>' +
             '<h2 class="card-name">' + esc(model.name) + '</h2>' +
@@ -482,9 +505,11 @@
           gsap.to(batch, { autoAlpha: 1, y: 0, duration: 1.8, stagger: 0.18, overwrite: true });
         }
       });
-      gsap.utils.toArray('.card-media img').forEach(function (img) {
-        gsap.fromTo(img, { yPercent: -4 }, {
-          yPercent: 4, ease: 'none',
+      // La foto (120 % del alto de la ventana) se desplaza ±5 % de su alto (±6 % de la ventana):
+      // nunca deja ver un borde vacío ni invade el paspartú.
+      gsap.utils.toArray('.card-photo img').forEach(function (img) {
+        gsap.fromTo(img, { yPercent: -5 }, {
+          yPercent: 5, ease: 'none',
           scrollTrigger: { trigger: img.closest('.card-media'), start: 'top bottom', end: 'bottom top', scrub: 1.2 }
         });
       });
@@ -824,9 +849,6 @@
 
   function showLoadError(err) {
     console.error(err);
-    veil.classList.remove('is-loading');
-    if (hasGsap) gsap.to(veil, { autoAlpha: 0, duration: 0.8 });
-    else veil.style.display = 'none';
     setHeader({ state: 'visible' });
     app.innerHTML =
       '<section class="notfound">' +
@@ -837,6 +859,119 @@
       '</section>';
   }
 
+  /* ------------------------------------------------------------------------
+     Pantalla de carga
+     El emblema aparece grande con las agujas girando y se achica a medida que
+     carga la página (datos → tipografías → fotos de la primera vista). Al
+     terminar, las agujas se detienen en la hora real y el emblema vuela a su
+     lugar en el header mientras aparece el contenido.
+     ------------------------------------------------------------------------ */
+
+  var loader = (function () {
+    var veilBg = veil.querySelector('.veil-bg');
+    var mark = veil.querySelector('.veil-emblem');
+    var t0 = performance.now();
+    var MIN_MS = 1800;            // tiempo mínimo para que la apertura se perciba
+    var SHRINK = 0.42;            // cuánto se achica mientras carga (0 → 1 de progreso)
+    var animated = hasGsap && !reducedMotion && !!mark;
+
+    if (window.LTEmblem && mark) LTEmblem.spin(mark);
+    if (animated) gsap.fromTo(mark, { autoAlpha: 0, scale: 1.08 }, { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'power2.out' });
+
+    function progress(p) {
+      if (animated) gsap.to(mark, { scale: 1 - SHRINK * p, duration: 0.9, ease: 'power2.out', overwrite: 'auto' });
+    }
+
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+    function withTimeout(promise, ms) { return Promise.race([promise, wait(ms)]); }
+
+    // Fotos que se ven al abrir la ruta inicial
+    function firstViewImages() {
+      var path = decodeURIComponent(location.hash.replace(/^#/, '')) || '/';
+      var m = path.match(/^\/marca\/([\w-]+)(?:\/([\w-]+))?/);
+      var brand = m && findBrand(m[1]);
+      if (!brand) return DATA.brands.map(function (b) { return b.logo; }).filter(Boolean);
+      if (m[2] === 'presentacion') return [brand.intro && brand.intro.poster].filter(Boolean);
+      var model = m[2] && findModel(brand, m[2]);
+      if (model) return (model.images || []).slice(0, 2);
+      return (brand.models || []).slice(0, 4).map(function (x) { return (x.images || [])[0]; }).filter(Boolean);
+    }
+
+    function preload(urls, from, to) {
+      if (!urls.length) { progress(to); return Promise.resolve(); }
+      var done = 0;
+      return Promise.all(urls.map(function (url) {
+        return new Promise(function (resolve) {
+          var img = new Image();
+          img.onload = img.onerror = function () { done++; progress(from + (to - from) * done / urls.length); resolve(); };
+          img.src = url;
+        });
+      }));
+    }
+
+    async function land() {
+      var target = header.dataset.state !== 'hidden' && header.querySelector('.sh-logo [data-lt-emblem]');
+      var settled = window.LTEmblem ? LTEmblem.settle(mark, 1500) : Promise.resolve();
+      if (!animated) {
+        await settled;
+        finish();
+        return;
+      }
+      await wait(60);                      // un cuadro para que el header tome su posición
+      var flight;
+      if (target) {
+        gsap.set(target, { autoAlpha: 0 });
+        var from = mark.getBoundingClientRect(), to = target.getBoundingClientRect();
+        var current = gsap.getProperty(mark, 'scale');
+        flight = gsap.to(mark, {
+          x: (to.left + to.width / 2) - (from.left + from.width / 2),
+          y: (to.top + to.height / 2) - (from.top + from.height / 2),
+          scale: current * (to.width / from.width),
+          duration: 1.5, ease: 'power3.inOut'
+        });
+      } else {
+        flight = gsap.to(mark, { autoAlpha: 0, scale: '-=0.1', duration: 1, ease: 'power2.in' });
+      }
+      gsap.to(veilBg, { autoAlpha: 0, duration: 1.3, delay: 0.25, ease: 'power2.inOut' });
+      await Promise.all([flight.then(), settled]);
+      if (target) gsap.to(target, { autoAlpha: 1, duration: 0.25 });
+      finish();
+    }
+
+    function finish() {
+      veil.classList.remove('is-loading');
+      if (hasGsap) {
+        gsap.set(veil, { autoAlpha: 0 });
+        gsap.set(veilBg, { autoAlpha: 1 });
+        gsap.set(mark, { clearProps: 'all' });
+      } else {
+        veil.style.display = 'none';
+      }
+    }
+
+    return {
+      progress: progress,
+      run: async function () {
+        progress(0.3);                                                     // datos listos
+        if (document.fonts && document.fonts.ready) await withTimeout(document.fonts.ready, 2500);
+        progress(0.5);                                                     // tipografías
+        await withTimeout(preload(firstViewImages(), 0.5, 1), 5000);       // fotos de la primera vista
+        progress(1);
+        var left = MIN_MS - (performance.now() - t0);
+        if (left > 0) await wait(left);
+        header.classList.add('no-anim');                                   // posición final del header, sin transición
+        router();                                                          // el contenido se arma bajo el velo
+        await land();
+        header.classList.remove('no-anim');
+      },
+      fail: function () {
+        if (window.LTEmblem && mark) LTEmblem.settle(mark, 600);
+        finish();
+      }
+    };
+  })();
+
   fetch('data.json', { cache: 'no-cache' })
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (json) {
@@ -846,7 +981,7 @@
       // Fuente de hora del emblema: "browser" (default) o "api" (TimeAPI.io con fallback al navegador)
       if (window.LTEmblem && DATA.site.clock && DATA.site.clock.source === 'api') LTEmblem.setSource('api');
       window.addEventListener('hashchange', router);
-      router();
+      return loader.run();
     })
-    .catch(showLoadError);
+    .catch(function (err) { loader.fail(); showLoadError(err); });
 })();

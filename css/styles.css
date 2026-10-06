@@ -199,13 +199,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .veil {
   position: fixed; inset: 0; z-index: 150;
   display: flex; align-items: center; justify-content: center;
-  background: var(--bg);
   pointer-events: none;
 }
+.veil-bg { position: absolute; inset: 0; background: var(--bg); }
 
-/* Pantalla de carga: el emblema solo se ve en la carga inicial */
-.veil-emblem { --em-size: 72px; transition: opacity 0.6s var(--ease); }
-.veil:not(.is-loading) .veil-emblem { opacity: 0; }
+/* Pantalla de carga: emblema grande con las agujas girando; se achica a medida
+   que carga la página y vuela a su lugar en el header. Solo en la carga inicial. */
+.veil-emblem { position: relative; --em-size: min(46vmin, 320px); will-change: transform; }
+.veil:not(.is-loading) .veil-emblem { visibility: hidden; }
 
 .grain {
   position: fixed; inset: -50%; z-index: 160;
@@ -226,8 +227,21 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   align-items: center;
   padding: 0 var(--gutter);
   background: linear-gradient(to bottom, color-mix(in srgb, var(--shade) 85%, transparent), transparent);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  border-bottom: 1px solid transparent;
+  transition: opacity 0.9s var(--ease), transform 0.7s var(--ease),
+              background-color 0.5s ease, border-color 0.5s ease;
 }
+
+/* Al desplazarse: el header se vuelve una banda sólida (no flota sobre el contenido)
+   y se esconde al bajar; reaparece al subir. */
+.site-header.is-scrolled {
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  border-bottom-color: var(--line);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+.site-header.is-tucked { transform: translateY(calc(-100% - 2px)); }
+.site-header.no-anim { transition: none !important; }
 
 .site-header[data-state="hidden"] { opacity: 0; pointer-events: none; transform: translateY(-12px); }
 /* En el inicio el nombre ya está en grande: el header muestra solo el emblema */
@@ -235,7 +249,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .site-header[data-state="minimal"] .sh-logo { gap: 0; }
 
 .sh-logo {
-  --em-size: 34px;
+  --em-size: 44px;
   display: inline-flex; align-items: center; gap: 0.9rem;
   color: var(--text);
 }
@@ -243,7 +257,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .sh-wordmark {
   font-family: var(--serif);
   font-weight: var(--serif-light);
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   letter-spacing: var(--track-wordmark);
   margin-right: calc(-1 * var(--track-wordmark)); /* compensa el tracking del último carácter */
   transition: opacity 0.9s var(--ease), max-width 0.9s var(--ease);
@@ -296,8 +310,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .theme-toggle .tt-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   .theme-toggle { padding: 0.6rem; margin-right: -0.6rem; }
   .sh-back-label, .sh-context { display: none; }
-  .sh-logo { --em-size: 28px; gap: 0.65rem; }
-  .sh-wordmark { font-size: 0.9rem; letter-spacing: 0.26em; margin-right: -0.26em; white-space: nowrap; }
+  .sh-logo { --em-size: 36px; gap: 0.65rem; }
+  .sh-wordmark { font-size: 0.95rem; letter-spacing: 0.26em; margin-right: -0.26em; white-space: nowrap; }
 }
 
 /* --------------------------------------------------------------------------
@@ -609,32 +623,39 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .model-card a { display: block; }
 
 .card-media {
+  /* Paspartú: el marco queda siempre visible; la foto se mueve solo dentro de la ventana */
+  --frame: clamp(12px, 1.4vw, 20px);
   position: relative;
   aspect-ratio: 4 / 5;
-  overflow: hidden;
+  padding: var(--frame);
   background: var(--surface);
 }
+[data-theme="light"] .card-media { background: var(--stage-surface); }
 
-/* Modo claro: la foto (tomada sobre fondo oscuro) va enmarcada en un paspartú oscuro */
-[data-theme="light"] .card-media {
-  background: var(--stage-surface);
-  padding: clamp(10px, 1.1vw, 16px);
+.card-window {
+  position: relative;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--stage-bg);
+  outline: 1px solid var(--line);
 }
-[data-theme="light"] .card-media::after { border-color: transparent; }
 
-.card-media img {
-  width: 100%; height: 100%; object-fit: cover;
+.card-photo {
+  position: absolute; inset: 0;
   transform: scale(1.001);
-  transition: transform 2.4s var(--ease), opacity 1.2s var(--ease);
+  transition: transform 2.4s var(--ease);
 }
 
-.model-card a:hover .card-media img,
-.model-card a:focus-visible .card-media img { transform: scale(1.045); }
-
-.card-media::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  border: 1px solid var(--line);
+/* La foto es 20 % más alta que la ventana: el parallax (±6 %) y el zoom del hover
+   nunca dejan ver un borde vacío ni invaden el marco. */
+.card-photo img {
+  position: absolute; left: 0; top: -10%;
+  width: 100%; height: 120%;
+  object-fit: cover;
 }
+
+.model-card a:hover .card-photo,
+.model-card a:focus-visible .card-photo { transform: scale(1.04); }
 
 .card-body {
   display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 0.3rem 1rem;

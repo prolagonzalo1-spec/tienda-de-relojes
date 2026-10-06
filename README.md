@@ -148,6 +148,11 @@ Fuente de hora (`data.json` → `site.clock.source`):
 - `"api"`: [TimeAPI.io](https://timeapi.io), sincroniza cada 5 min e interpola; si falla, vuelve al navegador.
   En la consola, `LTEmblem.getState()` indica la fuente activa.
 
+Apertura: al entrar, el emblema aparece grande con las agujas girando, se achica a medida que cargan los datos, las
+tipografías y las fotos de la primera vista, y vuela a su lugar en el header mientras aparece el contenido; las agujas
+se detienen en la hora real. En el header mide 44 px (36 px en mobile). Al desplazarse, el header pasa a ser una banda
+sólida, se esconde al bajar y reaparece al subir.
+
 Usos: tamaño mínimo 24 px; área de protección igual a la altura de la "L"; no deformar, no rotar (salvo las agujas),
 no recolorear fuera de la paleta.
 
