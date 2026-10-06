@@ -5,7 +5,7 @@
     "eyebrow": "Haute Horlogerie",
     "footer": "Proyecto académico sin fines comerciales. Las marcas, nombres e imágenes pertenecen a sus respectivos titulares.",
     "clock": {
-      "source": "browser",
+      "source": "api",
       "_opciones": "browser = hora del navegador (zona America/Argentina/Buenos_Aires) · api = TimeAPI.io cada 5 min, con fallback al navegador"
     }
   },
