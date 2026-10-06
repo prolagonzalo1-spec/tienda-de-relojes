@@ -498,6 +498,61 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 /* --------------------------------------------------------------------------
+   Relojes del mundo (inicio)
+   -------------------------------------------------------------------------- */
+
+.world {
+  padding: clamp(5rem, 14vh, 9rem) var(--gutter) clamp(5rem, 12vh, 8rem);
+  border-top: 1px solid var(--line);
+}
+
+.world-head { text-align: center; margin-bottom: clamp(3rem, 8vh, 5rem); }
+.world-head .eyebrow { margin-bottom: 1.2rem; }
+
+.world-title {
+  margin: 0;
+  font-family: var(--serif); font-weight: var(--serif-light);
+  font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1;
+  letter-spacing: var(--track-title);
+}
+
+.world-list {
+  list-style: none; margin: 0 auto; padding: 0;
+  max-width: 1200px;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+.world-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+.world-watch {
+  position: relative;
+  width: min(100%, 300px);
+  margin: 0 0 1.8rem;
+}
+.world-watch img { display: block; width: 100%; height: 100%; }
+.world-hands { position: absolute; overflow: visible; pointer-events: none; }
+
+.world-city {
+  margin: 0;
+  font-family: var(--serif); font-weight: var(--serif-light);
+  font-size: clamp(1.6rem, 2.4vw, 2rem); line-height: 1.2;
+  letter-spacing: var(--track-title);
+}
+
+.world-time {
+  margin: 0.4rem 0 0.8rem;
+  font-family: var(--sans); font-weight: var(--sans-light);
+  font-size: 1.05rem; letter-spacing: 0.12em;
+  color: var(--text);
+}
+
+@media (max-width: 760px) {
+  .world-list { grid-template-columns: 1fr; gap: 4rem; }
+  .world-watch { width: min(70%, 260px); }
+}
+
+/* --------------------------------------------------------------------------
    Intro de marca (video)
    -------------------------------------------------------------------------- */
 

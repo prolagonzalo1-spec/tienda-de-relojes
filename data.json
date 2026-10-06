@@ -7,6 +7,64 @@
     "clock": {
       "source": "api",
       "_opciones": "browser = hora del navegador (zona America/Argentina/Buenos_Aires) · api = TimeAPI.io cada 5 min, con fallback al navegador"
+    },
+    "worldClocks": {
+      "eyebrow": "La hora en el mundo",
+      "title": "Tres ciudades, tres maisons",
+      "_nota": "dial = centro (x, y) y radio de la esfera en píxeles de la imagen; hands = rolex | nautilus | royaloak",
+      "items": [
+        {
+          "city": "Nueva York",
+          "tz": "America/New_York",
+          "brand": "Rolex",
+          "model": "Submariner",
+          "image": "assets/world/rolex-submariner.webp",
+          "size": [
+            1021,
+            1541
+          ],
+          "dial": {
+            "x": 494.8,
+            "y": 723,
+            "r": 291
+          },
+          "hands": "rolex"
+        },
+        {
+          "city": "Londres",
+          "tz": "Europe/London",
+          "brand": "Patek Philippe",
+          "model": "Nautilus",
+          "image": "assets/world/patek-nautilus.webp",
+          "size": [
+            1024,
+            1536
+          ],
+          "dial": {
+            "x": 508.8,
+            "y": 727.3,
+            "r": 250
+          },
+          "hands": "nautilus"
+        },
+        {
+          "city": "Tokio",
+          "tz": "Asia/Tokyo",
+          "brand": "Audemars Piguet",
+          "model": "Royal Oak",
+          "image": "assets/world/ap-royal-oak.webp",
+          "size": [
+            1064,
+            1478
+          ],
+          "dial": {
+            "x": 527,
+            "y": 672.5,
+            "r": 284
+          },
+          "hands": "royaloak"
+        }
+      ]
     }
   },
   "brands": [

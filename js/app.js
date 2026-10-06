@@ -289,6 +289,104 @@
       'aria-label="' + esc(brand.name) + ', próximamente">' + inner + '</div></li>';
   }
 
+  /* ------------------------------------------------------------------------
+     Relojes del mundo (inicio): un reloj por maison con la hora de una ciudad.
+     Las fotos vienen sin agujas; las agujas se dibujan en SVG sobre la esfera.
+     ------------------------------------------------------------------------ */
+
+  var HAND_FILL = '#F3F1EA', HAND_EDGE = '#8E8C86', HAND_STEEL = '#C8C6C0';
+
+  // Agujas en un viewBox centrado (-100..100 = radio de la esfera), apuntando a las 12
+  var HANDS = {
+    rolex: {
+      hour: '<path d="M-2.6 12 L-2.6 -33 L2.6 -33 L2.6 12 Z"/><circle cy="-42" r="8.6" fill="none" stroke="' + HAND_FILL + '" stroke-width="4.4"/><path d="M-3.4 -50 L0 -60 L3.4 -50 Z"/>',
+      min: '<path d="M-2.2 15 L-3.6 -58 L0 -88 L3.6 -58 L2.2 15 Z"/>',
+      sec: '<path d="M-0.7 24 L-0.7 -90 L0.7 -90 L0.7 24 Z"/><circle cy="-66" r="4.2"/><circle cy="16" r="2.6"/>'
+    },
+    nautilus: {
+      hour: '<rect x="-3.4" y="-56" width="6.8" height="66" rx="3.4"/>',
+      min: '<rect x="-2.6" y="-86" width="5.2" height="96" rx="2.6"/>',
+      sec: '<path d="M-0.55 20 L-0.55 -92 L0.55 -92 L0.55 20 Z"/>'
+    },
+    royaloak: {
+      hour: '<rect x="-3.6" y="-54" width="7.2" height="62" rx="1.2"/>',
+      min: '<rect x="-2.8" y="-84" width="5.6" height="92" rx="1.2"/>',
+      sec: null
+    }
+  };
+
+  function worldHandsSVG(kind, uid) {
+    var h = HANDS[kind] || HANDS.nautilus;
+    var g = function (cls, inner) {
+      return '<g class="wh-' + cls + '" fill="' + HAND_FILL + '" stroke="' + HAND_EDGE + '" stroke-width="0.7" filter="url(#whs-' + uid + ')">' + inner + '</g>';
+    };
+    return '<defs><filter id="whs-' + uid + '" x="-50%" y="-50%" width="200%" height="200%">' +
+        '<feDropShadow dx="1.4" dy="2.2" stdDeviation="1.5" flood-color="#161613" flood-opacity="0.5"/></filter></defs>' +
+      g('hour', h.hour) + g('min', h.min) + (h.sec ? g('sec', h.sec) : '') +
+      '<circle r="4.6" fill="' + HAND_STEEL + '" stroke="' + HAND_EDGE + '" stroke-width="0.6"/>';
+  }
+
+  function worldClocksHTML() {
+    var wc = DATA.site.worldClocks;
+    if (!wc || !wc.items || !wc.items.length) return '';
+    var items = wc.items.map(function (it, i) {
+      var W = it.size[0], H = it.size[1], d = it.dial;
+      var pos = 'left:' + (100 * (d.x - d.r) / W).toFixed(3) + '%;top:' + (100 * (d.y - d.r) / H).toFixed(3) + '%;' +
+        'width:' + (100 * 2 * d.r / W).toFixed(3) + '%;height:' + (100 * 2 * d.r / H).toFixed(3) + '%';
+      return '<li class="world-item" data-tz="' + esc(it.tz) + '">' +
+        '<figure class="world-watch" style="aspect-ratio:' + W + ' / ' + H + '">' +
+          '<img src="' + esc(it.image) + '" alt="' + esc(it.brand + ' ' + it.model) + '" loading="lazy" decoding="async">' +
+          '<svg class="world-hands" style="' + pos + '" viewBox="-100 -100 200 200" aria-hidden="true">' + worldHandsSVG(it.hands, i) + '</svg>' +
+        '</figure>' +
+        '<p class="world-city">' + esc(it.city) + '</p>' +
+        '<time class="world-time">--:--</time>' +
+        '<p class="meta-label">' + esc(it.brand) + ' · ' + esc(it.model) + '</p>' +
+      '</li>';
+    }).join('');
+    return '<section class="world" aria-label="' + esc(wc.eyebrow || 'La hora en el mundo') + '">' +
+      '<header class="world-head">' +
+        '<p class="eyebrow">' + esc(wc.eyebrow || '') + '</p>' +
+        '<h2 class="world-title">' + esc(wc.title || '') + '</h2>' +
+      '</header>' +
+      '<ul class="world-list">' + items + '</ul>' +
+    '</section>';
+  }
+
+  // Desfase de cada zona horaria respecto del reloj del navegador (se recalcula cada 30 s por cambios de horario)
+  function tzOffset(tz) {
+    var now = new Date();
+    var p = new Intl.DateTimeFormat('en-GB', {
+      timeZone: tz, hourCycle: 'h23', year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    }).formatToParts(now).reduce(function (o, x) { o[x.type] = x.value; return o; }, {});
+    return Date.UTC(+p.year, +p.month - 1, +p.day, +p.hour, +p.minute, +p.second, now.getMilliseconds()) - now.getTime();
+  }
+
+  function startWorldClocks() {
+    var items = Array.prototype.map.call(app.querySelectorAll('.world-item'), function (li) {
+      return { tz: li.dataset.tz, hour: li.querySelector('.wh-hour'), min: li.querySelector('.wh-min'),
+               sec: li.querySelector('.wh-sec'), digital: li.querySelector('.world-time'), off: 0 };
+    });
+    if (!items.length) return;
+    var raf = 0, lastSync = 0;
+    function frame() {
+      var now = Date.now();
+      if (now - lastSync > 30000) { items.forEach(function (it) { it.off = tzOffset(it.tz); }); lastSync = now; }
+      items.forEach(function (it) {
+        var t = new Date(now + it.off);
+        var h = t.getUTCHours(), m = t.getUTCMinutes(), s = t.getUTCSeconds(), ms = t.getUTCMilliseconds();
+        it.hour.setAttribute('transform', 'rotate(' + ((h % 12) * 30 + m * 0.5) + ')');
+        it.min.setAttribute('transform', 'rotate(' + (m * 6 + s * 0.1) + ')');
+        if (it.sec) it.sec.setAttribute('transform', 'rotate(' + (s * 6 + ms * 0.006) + ')');
+        var txt = pad(h) + ':' + pad(m);
+        if (it.digital.textContent !== txt) { it.digital.textContent = txt; it.digital.setAttribute('datetime', txt); }
+      });
+      raf = requestAnimationFrame(frame);
+    }
+    frame();
+    cleanups.push(function () { cancelAnimationFrame(raf); });
+  }
+
   function renderHome() {
     var site = DATA.site;
     setHeader({ state: 'minimal' });
@@ -306,7 +404,11 @@
           '<p class="eyebrow brand-picker-label">Seleccione una maison</p>' +
           '<ul class="brand-list">' + DATA.brands.map(brandItemHTML).join('') + '</ul>' +
         '</nav>' +
-      '</section>';
+      '</section>' +
+      worldClocksHTML() +
+      footerHTML();
+
+    startWorldClocks();
 
     animate(function () {
       gsap.timeline({ delay: 0.3 })
@@ -316,6 +418,13 @@
         .from('.home-tagline', { autoAlpha: 0, y: 14, duration: 1.8 }, '-=1.5')
         .from('.brand-picker-label', { autoAlpha: 0, duration: 1.6 }, '-=1')
         .from('.brand-item', { autoAlpha: 0, y: 34, duration: 1.8, stagger: 0.18 }, '-=1.3');
+
+      if (document.querySelector('.world')) {
+        gsap.from('.world-head > *', { autoAlpha: 0, y: 24, duration: 1.6, stagger: 0.12,
+          scrollTrigger: { trigger: '.world', start: 'top 80%', once: true } });
+        gsap.from('.world-item', { autoAlpha: 0, y: 50, duration: 1.8, stagger: 0.18,
+          scrollTrigger: { trigger: '.world-list', start: 'top 85%', once: true } });
+      }
     });
   }
 
