@@ -181,7 +181,8 @@
 
   function footerHTML() {
     return '<footer class="site-footer">' +
-      '<span class="footer-logo">' + esc(DATA.site.name) + '</span>' +
+      '<span class="footer-logo"><span data-lt-emblem aria-hidden="true"></span>' + esc(DATA.site.name) + '</span>' +
+      '<span class="footer-clock">Buenos Aires <time data-lt-digital>--:--</time></span>' +
       '<span>' + esc(DATA.site.footer) + '</span>' +
       '</footer>';
   }
@@ -229,6 +230,8 @@
     if (!matched) renderNotFound();
 
     bindImages(app);
+    if (window.LTEmblem) LTEmblem.mount(app);
+    veil.classList.remove('is-loading');
     if (hasGsap) {
       ScrollTrigger.refresh();
       gsap.to(veil, { autoAlpha: 0, duration: firstRender ? 1.6 : 1.2, ease: 'power2.inOut', delay: 0.1, overwrite: true });
@@ -821,6 +824,7 @@
 
   function showLoadError(err) {
     console.error(err);
+    veil.classList.remove('is-loading');
     if (hasGsap) gsap.to(veil, { autoAlpha: 0, duration: 0.8 });
     else veil.style.display = 'none';
     setHeader({ state: 'visible' });
@@ -839,6 +843,8 @@
       DATA = json;
       DATA.site = DATA.site || { name: 'LUXURY TIME', tagline: '', eyebrow: '', footer: '' };
       DATA.brands = DATA.brands || [];
+      // Fuente de hora del emblema: "browser" (default) o "api" (TimeAPI.io con fallback al navegador)
+      if (window.LTEmblem && DATA.site.clock && DATA.site.clock.source === 'api') LTEmblem.setSource('api');
       window.addEventListener('hashchange', router);
       router();
     })

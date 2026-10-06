@@ -3,7 +3,11 @@
     "name": "LUXURY TIME",
     "tagline": "El tiempo, en su forma más pura.",
     "eyebrow": "Haute Horlogerie",
-    "footer": "Proyecto académico sin fines comerciales. Las marcas, nombres e imágenes pertenecen a sus respectivos titulares."
+    "footer": "Proyecto académico sin fines comerciales. Las marcas, nombres e imágenes pertenecen a sus respectivos titulares.",
+    "clock": {
+      "source": "browser",
+      "_opciones": "browser = hora del navegador (zona America/Argentina/Buenos_Aires) · api = TimeAPI.io cada 5 min, con fallback al navegador"
+    }
   },
   "brands": [
     {
