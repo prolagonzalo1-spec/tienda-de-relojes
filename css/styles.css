@@ -10,7 +10,7 @@
   --surface: #2A2A24;
   --surface-raised: #2A2A24;
   --text: #F4F1EA;            /* hueso */
-  --text-muted: #8A8378;
+  --text-muted: #968F86;
   --gold: #C5A465;            /* acento: líneas, texto, íconos */
   --gold-fill: #C5A465;       /* rellenos / áreas */
   --line: rgba(197, 164, 101, 0.30);
@@ -42,7 +42,7 @@
   --surface-raised: #FFFFFF;
   --text: #1A1714;            /* tinta */
   --text-muted: #6B6459;
-  --gold: #9C7C34;            /* oro profundo: texto, líneas e íconos */
+  --gold: #8B6E2E;            /* oro profundo: texto, líneas e íconos (AA) */
   --gold-fill: #C5A465;       /* oro claro: solo rellenos / áreas grandes */
   --line: rgba(156, 124, 52, 0.30);
   --on-gold: #1A1714;
@@ -59,7 +59,7 @@
   --surface: #2A2A24;
   --surface-raised: #2A2A24;
   --text: #F4F1EA;
-  --text-muted: #8A8378;
+  --text-muted: #968F86;
   --gold: #C5A465;
   --gold-fill: #C5A465;
   --line: rgba(197, 164, 101, 0.30);
