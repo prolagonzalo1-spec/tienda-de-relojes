@@ -118,6 +118,52 @@
   }
 
   /* ------------------------------------------------------------------------
+     Tema (noche / claro)
+     El atributo data-theme de <html> controla los tokens de color. La elección
+     se guarda en localStorage. Las rutas "teatro" (intro y ficha) marcan
+     data-surface="stage" y se ven siempre en modo noche.
+     ------------------------------------------------------------------------ */
+
+  var THEME_KEY = 'lt-theme';
+  var THEME_COLORS = { night: '#20201C', light: '#FBF8F1' };
+  var root = document.documentElement;
+  var themeToggle = header.querySelector('.theme-toggle');
+  var themeLabel = themeToggle.querySelector('.tt-label');
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  var themeTimer = null;
+
+  function currentTheme() { return root.getAttribute('data-theme') === 'light' ? 'light' : 'night'; }
+
+  function syncThemeUI() {
+    var theme = currentTheme();
+    var stage = root.getAttribute('data-surface') === 'stage';
+    themeLabel.textContent = theme === 'light' ? 'Claro' : 'Noche';
+    themeToggle.setAttribute('aria-label', theme === 'light' ? 'Cambiar a modo noche' : 'Cambiar a modo claro');
+    themeToggle.title = stage ? 'Esta sección se presenta siempre en modo noche' : '';
+    themeMeta.setAttribute('content', THEME_COLORS[stage ? 'night' : theme]);
+  }
+
+  function setTheme(theme) {
+    root.classList.add('is-theme-switching');
+    root.setAttribute('data-theme', theme);
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) { /* almacenamiento no disponible */ }
+    syncThemeUI();
+    clearTimeout(themeTimer);
+    themeTimer = setTimeout(function () { root.classList.remove('is-theme-switching'); }, 350);
+  }
+
+  function setStage(isStage) {
+    if (isStage) root.setAttribute('data-surface', 'stage');
+    else root.removeAttribute('data-surface');
+    syncThemeUI();
+  }
+
+  themeToggle.addEventListener('click', function () {
+    setTheme(currentTheme() === 'light' ? 'night' : 'light');
+  });
+  syncThemeUI();
+
+  /* ------------------------------------------------------------------------
      Cabecera
      ------------------------------------------------------------------------ */
 
@@ -172,6 +218,7 @@
 
     modal.close(true);
     teardown();
+    setStage(false);
     window.scrollTo(0, 0);
 
     var matched = false;
@@ -257,6 +304,7 @@
     if (!isAvailable(brand)) { location.replace('#/'); return; }
 
     var intro = brand.intro || {};
+    setStage(true);
     setHeader({ state: 'hidden' });
     document.title = brand.name + ' — Luxury Time';
 
@@ -466,6 +514,7 @@
     var model = findModel(brand, modelId);
     if (!model) return renderNotFound();
 
+    setStage(true);
     setHeader({ back: { href: '#/marca/' + brand.id, label: brand.name }, context: model.collection });
     document.title = model.name + ' — ' + brand.name + ' — Luxury Time';
 

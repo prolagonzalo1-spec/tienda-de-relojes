@@ -3,34 +3,27 @@
    ========================================================================== */
 
 :root {
-  /* ---- Tokens de marca (nombres del manual) -------------------------------
-     Etapa 1: conservan los valores actuales; los temas noche/claro llegan en la etapa 2. */
-  --bg: #070707;
-  --surface: #111110;
-  --surface-raised: #0d0d0c;
-  --text: #ece6da;
-  --gold: #b8975a;            /* acento: líneas, texto, íconos */
-  --gold-fill: #b8975a;       /* oro para rellenos / áreas */
-  --shade: #070707;           /* tono base de sombras y degradados */
-  --danger: #c98a7a;
-  --danger-line: #a15b4c;
+  color-scheme: dark;
 
-  /* ---- Derivados (se recalculan solos a partir de los tokens base) ------- */
-  --text-soft: color-mix(in srgb, var(--text) 70%, transparent);
-  --text-muted: color-mix(in srgb, var(--text) 50%, transparent);
-  --text-faint: color-mix(in srgb, var(--text) 30%, transparent);
-  --line: color-mix(in srgb, var(--text) 12%, transparent);
-  --gold-soft: color-mix(in srgb, var(--gold) 55%, transparent);
-  --gold-glow: color-mix(in srgb, var(--gold-fill) 7%, transparent);
-  --gold-glow-strong: color-mix(in srgb, var(--gold-fill) 16%, transparent);
-  --on-accent: var(--bg);     /* texto sobre relleno claro (hover de botones) */
-  --overlay: color-mix(in srgb, var(--shade) 82%, transparent);
+  /* ---- Tokens de marca: MODO NOCHE (default) ------------------------------ */
+  --bg: #20201C;              /* grafito cálido, nunca negro puro */
+  --surface: #2A2A24;
+  --surface-raised: #2A2A24;
+  --text: #F4F1EA;            /* hueso */
+  --text-muted: #8A8378;
+  --gold: #C5A465;            /* acento: líneas, texto, íconos */
+  --gold-fill: #C5A465;       /* rellenos / áreas */
+  --line: rgba(197, 164, 101, 0.30);
+  --on-gold: #20201C;         /* texto sobre relleno dorado */
+  --danger: #D09080;
+  --danger-line: #B06858;
+  --brand-badge-bg: transparent;
 
-  /* ---- "Teatro": secciones de foto a sangre (intro y ficha), siempre oscuras */
-  --stage-bg: #070707;
-  --stage-void: #000;
-  --stage-surface: #151413;
-  --stage-shade: #000;
+  /* ---- "Teatro": intro y ficha de foto a sangre. Iguales en ambos modos. -- */
+  --stage-bg: #20201C;
+  --stage-void: #1A1A17;      /* el más profundo de la casa; nunca #000 */
+  --stage-surface: #2A2A24;
+  --stage-shade: #161613;
 
   /* ---- Tipografía y layout ---------------------------------------------- */
   --serif: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
@@ -39,6 +32,65 @@
   --gutter: clamp(1rem, 4vw, 4rem);
   --header-h: 84px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- MODO CLARO ---------------------------------------------------------- */
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #FBF8F1;              /* marfil */
+  --surface: #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --text: #1A1714;            /* tinta */
+  --text-muted: #6B6459;
+  --gold: #9C7C34;            /* oro profundo: texto, líneas e íconos */
+  --gold-fill: #C5A465;       /* oro claro: solo rellenos / áreas grandes */
+  --line: rgba(156, 124, 52, 0.30);
+  --on-gold: #1A1714;
+  --danger: #9A4433;
+  --danger-line: #9A4433;
+  --brand-badge-bg: var(--stage-bg);
+}
+
+/* ---- Rutas "teatro" (intro y ficha): siempre en modo noche --------------- */
+[data-surface="stage"] body,
+[data-surface="stage"] .site-header {
+  color-scheme: dark;
+  --bg: #20201C;
+  --surface: #2A2A24;
+  --surface-raised: #2A2A24;
+  --text: #F4F1EA;
+  --text-muted: #8A8378;
+  --gold: #C5A465;
+  --gold-fill: #C5A465;
+  --line: rgba(197, 164, 101, 0.30);
+  --on-gold: #20201C;
+  --danger: #D09080;
+  --danger-line: #B06858;
+  --brand-badge-bg: transparent;
+}
+
+/* ---- Derivados: se declaran en cada ámbito que redefine los tokens base,
+   para que se recalculen con los valores de ese ámbito -------------------- */
+:root,
+[data-surface="stage"] body,
+[data-surface="stage"] .site-header {
+  --shade: var(--bg);         /* tono de los degradados del chrome */
+  --on-text: var(--bg);       /* texto sobre un relleno del color del texto */
+  --text-soft: color-mix(in srgb, var(--text) 72%, transparent);
+  --text-faint: color-mix(in srgb, var(--text) 30%, transparent);
+  --gold-soft: color-mix(in srgb, var(--gold) 55%, transparent);
+  --gold-glow: color-mix(in srgb, var(--gold-fill) 7%, transparent);
+  --gold-glow-strong: color-mix(in srgb, var(--gold-fill) 16%, transparent);
+  --overlay: color-mix(in srgb, var(--shade) 84%, transparent);
+}
+
+/* Transición suave al cambiar de tema (solo durante el cambio) */
+html.is-theme-switching,
+html.is-theme-switching *,
+html.is-theme-switching *::before,
+html.is-theme-switching *::after {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+              fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease !important;
 }
 
 *,
@@ -64,7 +116,7 @@ body {
 
 body.is-locked { overflow: hidden; }
 
-::selection { background: var(--gold-fill); color: var(--on-accent); }
+::selection { background: var(--gold-fill); color: var(--on-gold); }
 
 img { display: block; max-width: 100%; }
 
@@ -78,7 +130,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .skip-link {
   position: fixed; top: 0.5rem; left: 0.5rem; z-index: 200;
-  padding: 0.6rem 1rem; background: var(--text); color: var(--on-accent);
+  padding: 0.6rem 1rem; background: var(--text); color: var(--on-text);
   transform: translateY(-200%);
 }
 .skip-link:focus { transform: none; }
@@ -165,8 +217,25 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .sh-back:hover .sh-arrow { width: 40px; }
 
+.sh-right { display: flex; align-items: center; gap: 1.6rem; }
+
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 0;
+  font-family: var(--serif); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.06em;
+  color: var(--text-soft);
+  transition: color 0.6s var(--ease);
+}
+.theme-toggle:hover { color: var(--text); }
+.theme-toggle svg { width: 15px; height: 15px; flex: none; color: var(--gold); overflow: visible; }
+.theme-toggle .tt-sun { display: none; }
+[data-theme="light"] .theme-toggle .tt-sun { display: block; }
+[data-theme="light"] .theme-toggle .tt-moon { display: none; }
+
 @media (max-width: 700px) {
   :root { --header-h: 68px; }
+  .theme-toggle .tt-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .theme-toggle { padding: 0.6rem; margin-right: -0.6rem; }
   .sh-back-label, .sh-context { display: none; }
   .sh-logo { font-size: 0.9rem; letter-spacing: 0.26em; margin-right: -0.26em; }
 }
@@ -198,11 +267,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .btn-ghost { border: 1px solid var(--text-faint); color: var(--text); }
 .btn-ghost::before { background: var(--text); }
-.btn-ghost:hover, .btn-ghost:focus-visible { color: var(--on-accent); border-color: var(--text); }
+.btn-ghost:hover, .btn-ghost:focus-visible { color: var(--on-text); border-color: var(--text); }
 
 .btn-solid { border: 1px solid var(--gold); background: transparent; color: var(--text); }
-.btn-solid::before { background: var(--gold-fill); }
-.btn-solid:hover, .btn-solid:focus-visible { color: var(--on-accent); }
+.btn-solid::before { background: var(--text); }
+.btn-solid:hover, .btn-solid:focus-visible { color: var(--on-text); border-color: var(--text); }
 
 .link-line {
   position: relative; display: inline-block;
@@ -306,6 +375,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .brand-option:not([aria-disabled="true"]):hover::before,
 .brand-option:not([aria-disabled="true"]):focus-visible::before { opacity: 1; }
 
+.brand-logo,
+.catalog-logo,
+.if-logo { border-radius: 50%; background: var(--brand-badge-bg); }
+
 .brand-logo { width: 54px; height: 54px; opacity: 0.85; transition: opacity 0.9s var(--ease), transform 1.2s var(--ease); }
 .brand-option:not([aria-disabled="true"]):hover .brand-logo { opacity: 1; transform: scale(1.06); }
 
@@ -336,6 +409,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .brand-option[aria-disabled="true"] .brand-name,
 .brand-option[aria-disabled="true"] .brand-meta { opacity: 0.32; }
 .brand-option[aria-disabled="true"] .brand-cta { color: var(--text-muted); }
+[data-theme="light"] .brand-option[aria-disabled="true"] .brand-logo { opacity: 0.55; }
 .brand-option[aria-disabled="true"] .brand-cta::after { display: none; }
 
 @media (max-width: 700px) {
@@ -478,6 +552,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   overflow: hidden;
   background: var(--surface);
 }
+
+/* Modo claro: la foto (tomada sobre fondo oscuro) va enmarcada en un paspartú oscuro */
+[data-theme="light"] .card-media {
+  background: var(--stage-surface);
+  padding: clamp(10px, 1.1vw, 16px);
+}
+[data-theme="light"] .card-media::after { border-color: transparent; }
 
 .card-media img {
   width: 100%; height: 100%; object-fit: cover;
@@ -789,7 +870,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   background: transparent;
   border: 0; border-bottom: 1px solid var(--text-faint);
   border-radius: 0;
-  color-scheme: dark;
   transition: border-color 0.6s var(--ease);
 }
 .field input:focus { outline: none; border-bottom-color: var(--gold); }
