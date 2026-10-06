@@ -26,8 +26,18 @@
   --stage-shade: #161613;
 
   /* ---- Tipografía y layout ---------------------------------------------- */
-  --serif: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
-  --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  /* Dos familias, roles fijos (nunca una tercera):
+     Cormorant Garamond → títulos, logo, cifras destacadas · Inter → texto, etiquetas, datos */
+  --serif: "Cormorant Garamond", serif;
+  --sans: "Inter", sans-serif;
+  --serif-light: 300;
+  --serif-medium: 500;
+  --sans-light: 300;
+  --sans-regular: 400;
+  --sans-medium: 500;
+  --track-label: 0.28em;      /* etiquetas en MAYÚSCULAS */
+  --track-title: 0.02em;      /* títulos: tracking leve */
+  --track-wordmark: 0.3em;    /* LUXURY TIME */
 
   --gutter: clamp(1rem, 4vw, 4rem);
   --header-h: 84px;
@@ -105,7 +115,8 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
-  font-weight: 300;
+  font-weight: var(--sans-light);
+  font-synthesis: none;
   font-size: 15px;
   line-height: 1.75;
   letter-spacing: 0.01em;
@@ -122,6 +133,8 @@ img { display: block; max-width: 100%; }
 
 a { color: inherit; text-decoration: none; }
 
+code { font-family: var(--sans); font-weight: var(--sans-regular); }
+
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 
 :focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
@@ -136,13 +149,25 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .skip-link:focus { transform: none; }
 
 .eyebrow {
+  /* Etiqueta de sección: Inter, MAYÚSCULAS, tracking 0.28em, oro */
   margin: 0;
   font-family: var(--sans);
   font-size: 0.68rem;
-  font-weight: 400;
-  letter-spacing: 0.32em;
+  font-weight: var(--sans-medium);
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--gold);
+}
+
+/* Etiqueta de dato (no de sección): misma voz tipográfica, en gris */
+.meta-label {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: var(--sans-regular);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 /* --------------------------------------------------------------------------
@@ -155,7 +180,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .lt-emblem .em-gold   { fill: var(--gold); }
 .lt-emblem .em-hand   { fill: var(--gold-fill); }
 .lt-emblem .em-sec    { stroke: var(--gold-fill); }
-.lt-emblem .em-mono   { fill: var(--text); font-family: var(--serif); font-weight: 500; }
+.lt-emblem .em-mono   { fill: var(--text); font-family: var(--serif); font-weight: var(--serif-medium); }
 
 /* Usos del logo: tamaño mínimo 24 px, sin deformar (cuadrado), sin rotar.
    Área de protección = altura de la "L" del monograma ≈ 24 % del diámetro. */
@@ -217,10 +242,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .sh-wordmark {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: var(--serif-light);
   font-size: 1.05rem;
-  letter-spacing: 0.3em;
-  margin-right: -0.3em; /* compensa el tracking del último carácter */
+  letter-spacing: var(--track-wordmark);
+  margin-right: calc(-1 * var(--track-wordmark)); /* compensa el tracking del último carácter */
   transition: opacity 0.9s var(--ease), max-width 0.9s var(--ease);
 }
 
@@ -230,7 +255,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .sh-back,
 .sh-context {
   font-size: 0.68rem;
-  letter-spacing: 0.28em;
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--text-soft);
 }
@@ -256,7 +281,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .theme-toggle {
   display: inline-flex; align-items: center; gap: 0.6rem;
   padding: 0.5rem 0;
-  font-family: var(--serif); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.06em;
+  font-family: var(--serif); font-size: 1rem; font-weight: var(--serif-medium); letter-spacing: 0.04em;
   color: var(--text-soft);
   transition: color 0.6s var(--ease);
 }
@@ -285,8 +310,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   min-height: 54px;
   padding: 0 2.4rem;
   font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.3em;
+  font-weight: var(--sans-regular);
+  letter-spacing: var(--track-label);
   text-transform: uppercase;
   overflow: hidden;
   isolation: isolate;
@@ -310,7 +335,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .link-line {
   position: relative; display: inline-block;
-  font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
+  font-size: 0.68rem; letter-spacing: var(--track-label); text-transform: uppercase;
   color: var(--text-soft); padding-bottom: 0.5rem;
   transition: color 0.6s var(--ease);
 }
@@ -348,11 +373,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .home-logo {
   margin: 0;
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: var(--serif-light);
   font-size: clamp(2.1rem, 7.4vw, 6.4rem);
   line-height: 1;
-  letter-spacing: 0.3em;
-  margin-right: -0.3em;
+  letter-spacing: var(--track-wordmark);
+  margin-right: calc(-1 * var(--track-wordmark));
   color: var(--text);
   white-space: nowrap;
 }
@@ -368,7 +393,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   margin: 0;
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 300;
+  font-weight: var(--serif-light);
   font-size: clamp(1.15rem, 2vw, 1.5rem);
   color: var(--text-soft);
 }
@@ -378,7 +403,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .brand-picker-label {
   text-align: center;
   margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
-  color: var(--text-muted);
 }
 
 .brand-list {
@@ -421,16 +445,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .brand-name {
   font-family: var(--serif);
-  font-weight: 300;
+  font-weight: var(--serif-light);
   font-size: clamp(1.5rem, 2.4vw, 2rem);
   line-height: 1.1;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--track-title);
 }
 
-.brand-meta { font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); }
+.brand-meta { font-size: 0.66rem; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-muted); }
 
 .brand-cta {
-  font-size: 0.64rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
+  font-size: 0.64rem; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--gold);
   display: inline-flex; align-items: center; gap: 0.8rem;
 }
 .brand-cta::after {
@@ -492,9 +516,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .intro-fallback .if-name {
   margin: 0;
-  font-family: var(--serif); font-weight: 300;
+  font-family: var(--serif); font-weight: var(--serif-light);
   font-size: clamp(2.2rem, 6vw, 5rem); line-height: 1.05;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--track-title);
 }
 
 .intro-fallback .if-name .char { display: inline-block; white-space: pre; }
@@ -512,7 +536,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: absolute; right: var(--gutter); bottom: clamp(1.5rem, 5vh, 3rem); z-index: 2;
   display: inline-flex; align-items: center; gap: 0.9rem;
   padding: 0.9rem 0;
-  font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase;
+  font-size: 0.68rem; letter-spacing: var(--track-label); text-transform: uppercase;
   color: var(--text);
 }
 .intro-skip::after {
@@ -524,7 +548,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .intro-brand {
   position: absolute; left: var(--gutter); bottom: clamp(1.5rem, 5vh, 3rem); z-index: 2;
   padding: 0.9rem 0;
-  font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase;
+  font-size: 0.68rem; letter-spacing: var(--track-label); text-transform: uppercase;
   color: var(--text-soft);
 }
 
@@ -551,9 +575,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .catalog-title {
   margin: 0;
-  font-family: var(--serif); font-weight: 300;
+  font-family: var(--serif); font-weight: var(--serif-light);
   font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--track-title);
 }
 
 .catalog-desc {
@@ -618,8 +642,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .card-name {
   margin: 0;
-  font-family: var(--serif); font-weight: 300;
+  font-family: var(--serif); font-weight: var(--serif-light);
   font-size: clamp(1.5rem, 2.4vw, 2.1rem); line-height: 1.15;
+  letter-spacing: var(--track-title);
 }
 
 .card-ref { font-size: 0.7rem; letter-spacing: 0.18em; color: var(--text-muted); white-space: nowrap; }
@@ -687,10 +712,10 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .mv-index {
   position: absolute; left: var(--gutter); bottom: clamp(1.5rem, 5vh, 3rem); z-index: 2;
   display: flex; align-items: center; gap: 1rem;
-  font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase;
+  font-size: 0.66rem; letter-spacing: var(--track-label); text-transform: uppercase;
 }
 
-.mv-count { font-family: var(--serif); font-size: 1rem; letter-spacing: 0.1em; color: var(--text); min-width: 1.6em; }
+.mv-count { font-family: var(--serif); font-weight: var(--serif-medium); font-size: 1.05rem; letter-spacing: 0.08em; color: var(--text); min-width: 1.6em; }
 .mv-sep { width: 40px; height: 1px; background: var(--gold-soft); }
 .mv-label { color: var(--text-soft); }
 
@@ -710,20 +735,21 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .ms-title {
   margin: 0 0 1.8rem;
-  font-family: var(--serif); font-weight: 300;
+  font-family: var(--serif); font-weight: var(--serif-light);
   font-size: clamp(2rem, 3.6vw, 3.4rem); line-height: 1.08;
+  letter-spacing: var(--track-title);
 }
 
 .ms-first .ms-title { font-size: clamp(2.6rem, 5vw, 4.6rem); }
 
 .ms-text { margin: 0; color: var(--text-soft); font-size: 1rem; line-height: 1.9; }
 
-.ms-ref { margin-top: 2.2rem; font-size: 0.7rem; letter-spacing: 0.24em; color: var(--text-muted); text-transform: uppercase; }
+.ms-ref { margin-top: 2.2rem; font-size: 0.7rem; letter-spacing: var(--track-label); color: var(--text-muted); text-transform: uppercase; }
 
 .ms-hint {
   margin-top: 4rem;
   display: flex; align-items: center; gap: 1rem;
-  font-size: 0.64rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted);
+  font-size: 0.64rem; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-muted);
 }
 .ms-hint::before {
   content: ""; width: 1px; height: 42px;
@@ -743,7 +769,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   border-bottom: 1px solid var(--line);
 }
 
-.spec dt { font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--text-muted); padding-top: 0.2rem; }
+.spec dt { font-size: 0.66rem; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-muted); padding-top: 0.2rem; }
 .spec dd { margin: 0; font-size: 0.95rem; color: var(--text); }
 
 .ms-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; }
@@ -758,8 +784,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 .model-next .next-name {
-  font-family: var(--serif); font-weight: 300;
+  font-family: var(--serif); font-weight: var(--serif-light);
   font-size: clamp(2rem, 5vw, 4rem); line-height: 1.1;
+  letter-spacing: var(--track-title);
   transition: color 0.8s var(--ease);
 }
 .model-next a:hover .next-name { color: var(--gold); }
@@ -818,11 +845,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .site-footer .footer-logo {
   --em-size: 28px;
   display: inline-flex; align-items: center; gap: 0.9rem;
-  font-family: var(--serif); font-size: 0.95rem; letter-spacing: 0.3em; color: var(--text-soft);
+  font-family: var(--serif); font-weight: var(--serif-light); font-size: 0.95rem; letter-spacing: var(--track-wordmark); color: var(--text-soft);
 }
 
-.footer-clock { display: inline-flex; align-items: baseline; gap: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; }
-.footer-clock time { font-family: var(--sans); font-weight: 300; font-size: 0.85rem; letter-spacing: 0.12em; color: var(--text); }
+.footer-clock { display: inline-flex; align-items: baseline; gap: 0.7rem; letter-spacing: var(--track-label); text-transform: uppercase; }
+.footer-clock time { font-family: var(--sans); font-weight: var(--sans-light); font-size: 0.85rem; letter-spacing: 0.12em; color: var(--text); }
 
 /* --------------------------------------------------------------------------
    No encontrado
@@ -833,7 +860,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 1.6rem; text-align: center; padding: var(--gutter);
 }
-.notfound h1 { margin: 0; font-family: var(--serif); font-weight: 300; font-size: clamp(2rem, 5vw, 3.6rem); }
+.notfound h1 { margin: 0; font-family: var(--serif); font-weight: var(--serif-light); font-size: clamp(2rem, 5vw, 3.6rem); letter-spacing: var(--track-title); }
 .notfound p { margin: 0; color: var(--text-soft); }
 
 /* --------------------------------------------------------------------------
@@ -889,8 +916,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .modal-title {
   margin: 1rem 0 1rem;
-  font-family: var(--serif); font-weight: 300;
+  font-family: var(--serif); font-weight: var(--serif-light);
   font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.1;
+  letter-spacing: var(--track-title);
 }
 .modal-title:focus { outline: none; }
 
@@ -901,7 +929,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 
 .field { display: grid; gap: 0.5rem; }
 
-.field-label { font-size: 0.64rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); }
+.field-label { font-size: 0.64rem; letter-spacing: var(--track-label); text-transform: uppercase; color: var(--text-muted); }
 
 .field input {
   width: 100%;

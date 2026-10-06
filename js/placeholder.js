@@ -147,8 +147,8 @@
       }
     }
     // marca
-    s += '<text x="' + cx + '" y="' + (cy - 70) + '" text-anchor="middle" font-family="Georgia, serif" font-size="13" letter-spacing="4" fill="' + ink + '" opacity="0.85">' + p.label + '</text>';
-    s += '<text x="' + cx + '" y="' + (cy + 92) + '" text-anchor="middle" font-family="Georgia, serif" font-size="7.5" letter-spacing="3" fill="' + ink + '" opacity="0.5">SWISS MADE</text>';
+    s += '<text x="' + cx + '" y="' + (cy - 70) + '" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" letter-spacing="4" fill="' + ink + '" opacity="0.85">' + p.label + '</text>';
+    s += '<text x="' + cx + '" y="' + (cy + 92) + '" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="7.5" letter-spacing="3" fill="' + ink + '" opacity="0.5">SWISS MADE</text>';
     // subesfera
     s += '<circle cx="' + cx + '" cy="' + (cy + 56) + '" r="26" fill="none" stroke="' + ink + '" stroke-width="0.8" opacity="0.4"/>';
 
@@ -223,7 +223,7 @@
     s += '<g clip-path="url(#rc' + id + ')">';
     for (var x = 160; x < 660; x += 24) s += '<rect x="' + x + '" y="240" width="12" height="270" fill="#fff" opacity="0.08" transform="rotate(25 400 500)"/>';
     s += '</g>';
-    s += '<text x="' + cx + '" y="' + (cy - 150) + '" text-anchor="middle" font-family="Georgia, serif" font-size="13" letter-spacing="4" fill="' + p.m[2] + '">' + p.label + '</text>';
+    s += '<text x="' + cx + '" y="' + (cy - 150) + '" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="13" letter-spacing="4" fill="' + p.m[2] + '">' + p.label + '</text>';
     // puentes
     s += '<path d="M' + (cx - 40) + ' ' + (cy + 30) + 'L' + (cx + 170) + ' ' + (cy + 40) + 'Q' + (cx + 200) + ' ' + (cy + 90) + ' ' + (cx + 150) + ' ' + (cy + 120) + 'L' + (cx - 30) + ' ' + (cy + 110) + 'Z" fill="url(#mt' + id + ')"/>';
     s += '<path d="M' + (cx - 200) + ' ' + (cy + 60) + 'L' + (cx - 60) + ' ' + (cy + 20) + 'L' + (cx - 70) + ' ' + (cy + 170) + 'Q' + (cx - 150) + ' ' + (cy + 170) + ' ' + (cx - 200) + ' ' + (cy + 60) + 'Z" fill="url(#mr' + id + ')"/>';
@@ -267,7 +267,7 @@
       }
       // cierre
       s += '<rect x="' + (cx - 100) + '" y="460" width="200" height="90" rx="10" fill="url(#mr' + id + ')"/>';
-      s += '<text x="' + cx + '" y="512" text-anchor="middle" font-family="Georgia, serif" font-size="12" letter-spacing="4" fill="' + p.m[2] + '">' + p.label + '</text>';
+      s += '<text x="' + cx + '" y="512" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="12" letter-spacing="4" fill="' + p.m[2] + '">' + p.label + '</text>';
     } else {
       s += '<rect x="' + (cx - 90) + '" y="-80" width="180" height="1160" rx="20" fill="url(#st' + id + ')"/>';
       // textura de escamas

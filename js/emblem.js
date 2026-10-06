@@ -188,7 +188,7 @@
       .replace(/class="em-ring"/g, 'fill="none" stroke="' + gold + '"')
       .replace(/class="em-tick"/g, 'stroke="' + gold + '"')
       .replace(/class="em-gold"/g, 'fill="' + gold + '"')
-      .replace('class="em-mono"', 'fill="' + text + '" font-family="Cormorant Garamond, Georgia, serif" font-weight="500"')
+      .replace('class="em-mono"', 'fill="' + text + '" font-family="Cormorant Garamond, serif" font-weight="500"')
       .replace('class="em-ticks"', '')
       .replace('<circle', '<circle cx="120" cy="120" r="118" fill="' + bg + '"/><circle');
     favicon.setAttribute('href', 'data:image/svg+xml,' + encodeURIComponent(svg));

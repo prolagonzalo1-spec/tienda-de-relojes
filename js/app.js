@@ -320,7 +320,7 @@
           '<p class="eyebrow if-eyebrow">Luxury Time presenta</p>' +
           '<h1 class="if-name" aria-label="' + esc(brand.name) + '">' + splitChars(brand.name) + '</h1>' +
           '<span class="if-rule" aria-hidden="true"></span>' +
-          '<p class="eyebrow if-meta">' + esc(brand.origin) + (brand.founded ? ' · Desde ' + esc(brand.founded) : '') + '</p>' +
+          '<p class="meta-label if-meta">' + esc(brand.origin) + (brand.founded ? ' · Desde ' + esc(brand.founded) : '') + '</p>' +
         '</div>' +
         '<div class="intro-shade" aria-hidden="true"></div>' +
         '<span class="intro-brand">' + esc(brand.name) + '</span>' +
@@ -461,7 +461,7 @@
           '<p class="eyebrow ch-eyebrow">' + esc(brand.origin) + (brand.founded ? ' · Desde ' + esc(brand.founded) : '') + '</p>' +
           '<h1 class="catalog-title">' + esc(brand.name) + '</h1>' +
           '<p class="catalog-desc">' + esc(brand.description) + '</p>' +
-          '<p class="eyebrow catalog-count">' + n + (n === 1 ? ' modelo' : ' modelos') + '</p>' +
+          '<p class="meta-label catalog-count">' + n + (n === 1 ? ' modelo' : ' modelos') + '</p>' +
         '</header>' +
         '<ul class="model-grid" role="list">' + cards + '</ul>' +
       '</section>' +
