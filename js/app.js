@@ -566,6 +566,7 @@
 
     setHeader({ back: { href: '#/', label: 'Marcas' }, context: brand.origin });
     document.title = brand.name + ' — Colecciones — Luxury Time';
+    if (brand.layout === 'editorial') return renderCatalogEditorial(brand);
 
     var cards = brand.models.map(function (model, i) {
       var key = placeholderOpts(brand, model);
@@ -645,6 +646,169 @@
      Vista: Ficha de modelo
      ------------------------------------------------------------------------ */
 
+  function modelNextHTML(brand, model) {
+    var idx = brand.models.indexOf(model);
+    var next = brand.models[(idx + 1) % brand.models.length];
+    return next !== model
+      ? '<nav class="model-next" aria-label="Siguiente modelo">' +
+          '<a href="#/marca/' + esc(brand.id) + '/' + esc(next.id) + '">' +
+            '<span class="eyebrow">Siguiente modelo · ' + esc(next.collection) + '</span>' +
+            '<span class="next-name">' + esc(next.name) + '</span>' +
+          '</a>' +
+          '<a class="link-line" href="#/marca/' + esc(brand.id) + '">Ver toda la colección</a>' +
+        '</nav>'
+      : '<nav class="model-next"><a class="link-line" href="#/marca/' + esc(brand.id) + '">Ver toda la colección</a></nav>';
+  }
+
+  /* ------------------------------------------------------------------------
+     Presentación "editorial" (marcas con layout: "editorial", p. ej. Patek)
+     Catálogo en filas alternadas y ficha con portada a sangre y secciones
+     que alternan imagen y texto, en lugar de la imagen fija de Rolex.
+     ------------------------------------------------------------------------ */
+
+  function catalogHeroHTML(brand) {
+    var n = brand.models.length;
+    return '<header class="catalog-hero">' +
+      (brand.logo ? '<img class="catalog-logo" src="' + esc(brand.logo) + '" alt="" data-hide-on-error>' : '') +
+      '<p class="eyebrow ch-eyebrow">' + esc(brand.origin) + (brand.founded ? ' · Desde ' + esc(brand.founded) : '') + '</p>' +
+      '<h1 class="catalog-title">' + esc(brand.name) + '</h1>' +
+      '<p class="catalog-desc">' + esc(brand.description) + '</p>' +
+      '<p class="meta-label catalog-count">' + n + (n === 1 ? ' modelo' : ' modelos') + '</p>' +
+    '</header>';
+  }
+
+  function renderCatalogEditorial(brand) {
+    var rows = brand.models.map(function (model, i) {
+      var key = placeholderOpts(brand, model);
+      var href = '#/marca/' + esc(brand.id) + '/' + esc(model.id);
+      var intro = (model.sections || [])[0];
+      return '<li class="ed-row' + (i % 2 ? ' is-reverse' : '') + '">' +
+        '<a class="ed-media card-media" href="' + href + '" tabindex="-1" aria-hidden="true">' +
+          '<div class="card-window"><div class="card-photo">' +
+            imgTag((model.images || [])[0], model.name, key, 'front', 'loading="' + (i < 1 ? 'eager' : 'lazy') + '"') +
+          '</div></div>' +
+        '</a>' +
+        '<div class="ed-body">' +
+          '<p class="ed-index" aria-hidden="true">' + pad(i + 1) + '</p>' +
+          '<p class="eyebrow">' + esc(model.collection) + '</p>' +
+          '<h2 class="ed-name"><a href="' + href + '">' + esc(model.name) + '</a></h2>' +
+          (intro ? '<p class="ed-text">' + esc(intro.text) + '</p>' : '') +
+          '<p class="meta-label">' + esc(model.reference) + '</p>' +
+          '<a class="link-line" href="' + href + '">Descubrir la pieza</a>' +
+        '</div>' +
+      '</li>';
+    }).join('');
+
+    app.innerHTML =
+      '<section class="catalog catalog-editorial">' + catalogHeroHTML(brand) +
+        '<ol class="ed-list" role="list">' + rows + '</ol>' +
+      '</section>' + footerHTML();
+
+    animate(function () {
+      gsap.timeline({ delay: 0.3 })
+        .from('.catalog-logo', { autoAlpha: 0, scale: 0.92, duration: 2 })
+        .from('.ch-eyebrow', { autoAlpha: 0, y: 12, duration: 1.6 }, '-=1.5')
+        .from('.catalog-title', { autoAlpha: 0, y: 40, duration: 2 }, '-=1.3')
+        .from('.catalog-desc, .catalog-count', { autoAlpha: 0, y: 20, duration: 1.8, stagger: 0.15 }, '-=1.4');
+
+      gsap.utils.toArray('.ed-row').forEach(function (row) {
+        var st = { trigger: row, start: 'top 82%', once: true };
+        gsap.from(row.querySelector('.ed-media'), { clipPath: 'inset(14% 14% 14% 14%)', autoAlpha: 0, duration: 2, ease: 'power3.out', scrollTrigger: st });
+        gsap.from(row.querySelectorAll('.ed-body > *'), { autoAlpha: 0, y: 30, duration: 1.6, stagger: 0.1, delay: 0.3, scrollTrigger: st });
+      });
+      // Misma regla que la grilla: la foto se mueve dentro de su marco sin tocarlo
+      gsap.utils.toArray('.ed-media .card-photo img').forEach(function (img) {
+        gsap.fromTo(img, { yPercent: -5 }, { yPercent: 5, ease: 'none',
+          scrollTrigger: { trigger: img.closest('.ed-media'), start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
+      });
+    });
+  }
+
+  function renderModelEditorial(brand, model) {
+    var key = placeholderOpts(brand, model);
+    var images = model.images || [];
+    var specs = model.specifications || { items: [] };
+    var sections = model.sections || [];
+    var hero = sections[0] || { text: '' };
+    var used = { 0: true };      // la portada ya usa la imagen 0
+    var prevQuote = false;
+    var flip = false;
+
+    var blocks = sections.slice(1).map(function (s, k) {
+      var i = k + 1;
+      var imgIdx = s.image != null ? s.image : i;
+      var copy =
+        '<p class="eyebrow pe-reveal"><span class="num">' + pad(i + 1) + '</span>' + esc(s.eyebrow) + '</p>' +
+        '<h2 class="pe-title pe-reveal">' + esc(s.title) + '</h2>' +
+        '<p class="pe-text pe-reveal">' + esc(s.text) + '</p>';
+      // Imagen nueva → imagen + texto. Imagen ya mostrada → bloque solo de texto, o un
+      // acercamiento a la esfera si el bloque anterior ya fue de texto (así no se repite la foto igual).
+      var seen = !images[imgIdx] || used[imgIdx];
+      if (seen && !prevQuote) {
+        prevQuote = true;
+        return '<section class="pe-quote" id="' + esc(s.id) + '"><div class="pe-copy">' + copy + '</div></section>';
+      }
+      var detail = seen;
+      used[imgIdx] = true; prevQuote = false; flip = !flip;
+      return '<section class="pe-split' + (flip ? '' : ' is-reverse') + '" id="' + esc(s.id) + '">' +
+        '<figure class="pe-figure' + (detail ? ' is-detail' : '') + '">' + imgTag(images[imgIdx], model.name + ' — ' + s.eyebrow, key, imgIdx, 'loading="lazy"') + '</figure>' +
+        '<div class="pe-copy">' + copy + '</div>' +
+      '</section>';
+    }).join('');
+
+    var specsHTML =
+      '<section class="pe-specs" id="especificaciones"><div class="pe-copy">' +
+        '<p class="eyebrow pe-reveal"><span class="num">' + pad(sections.length + 1) + '</span>Especificaciones</p>' +
+        '<h2 class="pe-title pe-reveal">' + esc(specs.title || 'Especificaciones técnicas') + '</h2>' +
+        '<dl class="specs pe-specs-grid">' + (specs.items || []).map(function (it) {
+          return '<div class="spec reveal-spec"><dt>' + esc(it.label) + '</dt><dd>' + esc(it.value) + '</dd></div>';
+        }).join('') + '</dl>' +
+        '<div class="ms-actions pe-reveal"><button class="btn btn-solid" type="button" data-appointment>Solicitar cita en boutique</button></div>' +
+      '</div></section>';
+
+    app.innerHTML =
+      '<article class="pe">' +
+        '<header class="pe-hero">' +
+          '<div class="pe-hero-media">' + imgTag(images[0], model.name, key, 0, 'loading="eager"') + '</div>' +
+          '<div class="pe-hero-copy">' +
+            '<p class="eyebrow pe-hero-in">' + esc(model.collection) + '</p>' +
+            '<h1 class="pe-hero-title pe-hero-in">' + esc(model.name) + '</h1>' +
+            '<p class="pe-hero-text pe-hero-in">' + esc(hero.text) + '</p>' +
+            '<p class="meta-label pe-hero-in">' + esc(model.reference) + '</p>' +
+          '</div>' +
+        '</header>' +
+        blocks + specsHTML +
+        modelNextHTML(brand, model) +
+      '</article>' + footerHTML();
+
+    var btn = app.querySelector('[data-appointment]');
+    btn.addEventListener('click', function () { modal.open(model, btn); });
+
+    animate(function () {
+      gsap.fromTo('.pe-hero-media img', { scale: 1.12 }, { scale: 1, duration: 3, ease: 'power2.out' });
+      gsap.from('.pe-hero-in', { autoAlpha: 0, y: 40, duration: 1.8, stagger: 0.14, delay: 0.5 });
+      gsap.to('.pe-hero-media img', { yPercent: 8, ease: 'none',
+        scrollTrigger: { trigger: '.pe-hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+      gsap.utils.toArray('.pe-figure').forEach(function (fig) {
+        gsap.from(fig, { clipPath: 'inset(16% 16% 16% 16%)', duration: 2, ease: 'power3.out',
+          scrollTrigger: { trigger: fig, start: 'top 85%', once: true } });
+        var detail = fig.classList.contains('is-detail');
+        gsap.fromTo(fig.querySelector('img'), { scale: detail ? 1.95 : 1.18 }, { scale: detail ? 1.7 : 1.02, ease: 'none',
+          scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
+      });
+      gsap.utils.toArray('.pe-copy').forEach(function (c) {
+        gsap.from(c.querySelectorAll('.pe-reveal'), { autoAlpha: 0, y: 40, duration: 1.6, stagger: 0.12,
+          scrollTrigger: { trigger: c, start: 'top 82%', once: true } });
+      });
+      var rows = app.querySelectorAll('.pe-specs .reveal-spec');
+      if (rows.length) gsap.from(rows, { autoAlpha: 0, y: 24, duration: 1.2, stagger: 0.06,
+        scrollTrigger: { trigger: '.pe-specs-grid', start: 'top 85%', once: true } });
+      gsap.from('.model-next > *', { y: 40, autoAlpha: 0, duration: 1.6, stagger: 0.15,
+        scrollTrigger: { trigger: '.model-next', start: 'top 80%', once: true } });
+    });
+  }
+
   function renderModel(brandId, modelId) {
     var brand = findBrand(brandId);
     if (!isAvailable(brand)) return brand ? renderComingSoon(brand) : renderNotFound();
@@ -654,6 +818,7 @@
     setStage(true);
     setHeader({ back: { href: '#/marca/' + brand.id, label: brand.name }, context: model.collection });
     document.title = model.name + ' — ' + brand.name + ' — Luxury Time';
+    if (brand.layout === 'editorial') return renderModelEditorial(brand, model);
 
     var key = placeholderOpts(brand, model);
     var images = model.images || [];
@@ -707,17 +872,7 @@
         '</div>' +
       '</section>';
 
-    var idx = brand.models.indexOf(model);
-    var next = brand.models[(idx + 1) % brand.models.length];
-    var nextHTML = next !== model
-      ? '<nav class="model-next" aria-label="Siguiente modelo">' +
-          '<a href="#/marca/' + esc(brand.id) + '/' + esc(next.id) + '">' +
-            '<span class="eyebrow">Siguiente modelo · ' + esc(next.collection) + '</span>' +
-            '<span class="next-name">' + esc(next.name) + '</span>' +
-          '</a>' +
-          '<a class="link-line" href="#/marca/' + esc(brand.id) + '">Ver toda la colección</a>' +
-        '</nav>'
-      : '<nav class="model-next"><a class="link-line" href="#/marca/' + esc(brand.id) + '">Ver toda la colección</a></nav>';
+    var nextHTML = modelNextHTML(brand, model);
 
     app.innerHTML =
       '<article class="model">' +

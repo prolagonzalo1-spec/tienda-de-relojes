@@ -747,6 +747,126 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 
 /* --------------------------------------------------------------------------
+   Catálogo editorial (p. ej. Patek Philippe): filas grandes alternadas
+   -------------------------------------------------------------------------- */
+
+.ed-list { list-style: none; margin: 0 auto; padding: 0; max-width: 1300px; display: grid; gap: clamp(5rem, 14vh, 10rem); }
+
+.ed-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 7rem);
+}
+.ed-row.is-reverse .ed-media { order: 2; }
+
+.ed-media { display: block; }
+
+.ed-index {
+  margin: 0 0 1.4rem;
+  font-family: var(--serif); font-weight: var(--serif-medium);
+  font-size: 1.1rem; letter-spacing: 0.08em; color: var(--text-muted);
+}
+.ed-body .eyebrow { margin-bottom: 1rem; }
+
+.ed-name {
+  margin: 0 0 1.6rem;
+  font-family: var(--serif); font-weight: var(--serif-light);
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem); line-height: 1.05;
+  letter-spacing: var(--track-title);
+}
+.ed-name a { transition: color 0.8s var(--ease); }
+.ed-name a:hover { color: var(--gold); }
+
+.ed-text { margin: 0 0 1.6rem; max-width: 30rem; color: var(--text-soft); font-size: 1rem; line-height: 1.9; }
+.ed-body .meta-label { margin-bottom: 2.2rem; }
+
+@media (max-width: 860px) {
+  .ed-row { grid-template-columns: 1fr; gap: 2rem; }
+  .ed-row.is-reverse .ed-media { order: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Ficha editorial: portada a sangre + secciones que alternan imagen y texto
+   -------------------------------------------------------------------------- */
+
+.pe-hero {
+  position: relative;
+  min-height: 100vh; min-height: 100svh;
+  display: flex; align-items: flex-end;
+  padding: calc(var(--header-h) + 2rem) var(--gutter) clamp(3rem, 9vh, 6rem);
+  overflow: hidden;
+}
+.pe-hero-media { position: absolute; inset: 0; }
+.pe-hero-media img { width: 100%; height: 100%; object-fit: cover; }
+.pe-hero::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to bottom, color-mix(in srgb, var(--stage-shade) 60%, transparent), transparent 25%),
+    linear-gradient(to top, color-mix(in srgb, var(--stage-bg) 92%, transparent), color-mix(in srgb, var(--stage-bg) 40%, transparent) 45%, transparent 75%);
+}
+.pe-hero-copy { position: relative; z-index: 1; max-width: 40rem; }
+.pe-hero-copy .eyebrow { margin-bottom: 1.2rem; }
+.pe-hero-title {
+  margin: 0 0 1.6rem;
+  font-family: var(--serif); font-weight: var(--serif-light);
+  font-size: clamp(2.8rem, 7vw, 6.2rem); line-height: 1;
+  letter-spacing: var(--track-title);
+}
+.pe-hero-text { margin: 0 0 1.6rem; color: var(--text-soft); font-size: 1.02rem; line-height: 1.9; max-width: 34rem; }
+
+.pe-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 7rem);
+  padding: clamp(4rem, 12vh, 8rem) var(--gutter);
+}
+.pe-split.is-reverse .pe-figure { order: 2; }
+
+.pe-figure {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--stage-surface);
+}
+.pe-figure img { width: 100%; height: 100%; object-fit: cover; }
+/* Acercamiento: la misma foto, encuadrada sobre la esfera */
+.pe-figure.is-detail img { transform-origin: 50% 42%; }
+
+.pe-copy { max-width: 32rem; }
+.pe-copy .eyebrow { margin-bottom: 1.4rem; display: flex; align-items: center; gap: 1rem; }
+.pe-copy .eyebrow .num { color: var(--text-muted); }
+.pe-title {
+  margin: 0 0 1.6rem;
+  font-family: var(--serif); font-weight: var(--serif-light);
+  font-size: clamp(2rem, 3.8vw, 3.4rem); line-height: 1.08;
+  letter-spacing: var(--track-title);
+}
+.pe-text { margin: 0; color: var(--text-soft); font-size: 1rem; line-height: 1.9; }
+
+/* Bloque solo de texto: centrado, con aire, entre dos imágenes */
+.pe-quote {
+  padding: clamp(5rem, 16vh, 10rem) var(--gutter);
+  display: flex; justify-content: center; text-align: center;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.pe-quote .pe-copy { max-width: 40rem; }
+.pe-quote .eyebrow { justify-content: center; }
+.pe-quote .pe-text { font-family: var(--serif); font-style: italic; font-weight: var(--serif-light); font-size: clamp(1.3rem, 2.2vw, 1.7rem); line-height: 1.6; color: var(--text); }
+
+.pe-specs { padding: clamp(5rem, 14vh, 9rem) var(--gutter); display: flex; justify-content: center; }
+.pe-specs .pe-copy { max-width: 980px; width: 100%; }
+.specs.pe-specs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(2rem, 5vw, 5rem); }
+
+@media (max-width: 860px) {
+  .pe-split { grid-template-columns: 1fr; gap: 2.4rem; }
+  .pe-split.is-reverse .pe-figure { order: 0; }
+  .specs.pe-specs-grid { grid-template-columns: 1fr; }
+  .pe-hero { align-items: flex-end; }
+}
+
+/* --------------------------------------------------------------------------
    Ficha de modelo
    -------------------------------------------------------------------------- */
 

@@ -620,8 +620,315 @@
         "video": "assets/patek-philippe/intro.mp4",
         "poster": "assets/patek-philippe/intro-poster.webp"
       },
-      "description": "Manufactura ginebrina independiente desde 1839.",
-      "models": []
+      "description": "Manufactura ginebrina independiente desde 1839, en manos de la familia Stern desde 1932. La colección Nautilus, presentada en 1976, llevó la alta relojería al reloj deportivo.",
+      "models": [
+        {
+          "id": "nautilus-acero",
+          "name": "Nautilus · Acero",
+          "collection": "Nautilus",
+          "reference": "Ref. 5711/1A",
+          "palette": {
+            "dial": "#1d3557",
+            "metal": "steel",
+            "strap": "bracelet"
+          },
+          "images": [
+            "assets/patek-philippe/nautilus-acero/01.webp",
+            "assets/patek-philippe/nautilus-acero/02.webp",
+            "assets/patek-philippe/nautilus-acero/03.webp",
+            "assets/patek-philippe/nautilus-acero/04.webp"
+          ],
+          "sections": [
+            {
+              "id": "presentacion",
+              "eyebrow": "Presentación",
+              "title": "Nautilus",
+              "text": "Presentado en 1976 y dibujado por Gérald Genta, el Nautilus llevó la forma de un ojo de buey de barco a la muñeca. La referencia 5711 fue su versión en acero durante quince años.",
+              "image": 0
+            },
+            {
+              "id": "esfera",
+              "eyebrow": "La esfera",
+              "title": "Azul degradé",
+              "text": "Esfera azul que se oscurece hacia el borde, con relieve horizontal y índices bastón en oro blanco con revestimiento luminiscente.",
+              "image": 1
+            },
+            {
+              "id": "caja",
+              "eyebrow": "La caja",
+              "title": "Ojo de buey",
+              "text": "Caja de acero de 40 mm y 8,3 mm de altura, con bisel octogonal de ángulos redondeados y las dos aletas laterales que dan al Nautilus su silueta.",
+              "image": 2
+            },
+            {
+              "id": "movimiento",
+              "eyebrow": "El movimiento",
+              "title": "Calibre 26-330 S C",
+              "text": "Movimiento de carga automática con rotor central en oro de 21 quilates, visible a través del fondo de zafiro. Lleva el Sello Patek Philippe.",
+              "image": 0
+            },
+            {
+              "id": "malla",
+              "eyebrow": "El brazalete",
+              "title": "Brazalete integrado",
+              "text": "Brazalete de acero que nace de la caja sin interrupción, con eslabones satinados y pulidos, y cierre desplegable Nautilus.",
+              "image": 3
+            }
+          ],
+          "specifications": {
+            "title": "Especificaciones técnicas",
+            "image": 3,
+            "items": [
+              {
+                "label": "Referencia",
+                "value": "5711/1A"
+              },
+              {
+                "label": "Caja",
+                "value": "Acero, 40 mm"
+              },
+              {
+                "label": "Altura",
+                "value": "8,3 mm"
+              },
+              {
+                "label": "Hermeticidad",
+                "value": "120 m"
+              },
+              {
+                "label": "Calibre",
+                "value": "26-330 S C, carga automática"
+              },
+              {
+                "label": "Reserva de marcha",
+                "value": "35 a 45 horas"
+              },
+              {
+                "label": "Frecuencia",
+                "value": "28.800 a/h (4 Hz)"
+              },
+              {
+                "label": "Funciones",
+                "value": "Horas, minutos, segundero central, fecha"
+              },
+              {
+                "label": "Esfera",
+                "value": "Azul degradé con relieve horizontal"
+              },
+              {
+                "label": "Brazalete",
+                "value": "Acero, cierre desplegable Nautilus"
+              },
+              {
+                "label": "Cristal",
+                "value": "Zafiro, fondo de zafiro"
+              }
+            ]
+          }
+        },
+        {
+          "id": "nautilus-oro-rosa",
+          "name": "Nautilus · Oro rosa",
+          "collection": "Nautilus",
+          "reference": "Ref. 5711/1R",
+          "palette": {
+            "dial": "#3b2a1f",
+            "metal": "rose",
+            "strap": "bracelet"
+          },
+          "images": [
+            "assets/patek-philippe/nautilus-oro-rosa/01.webp",
+            "assets/patek-philippe/nautilus-oro-rosa/02.webp"
+          ],
+          "sections": [
+            {
+              "id": "presentacion",
+              "eyebrow": "Presentación",
+              "title": "Nautilus",
+              "text": "La forma del Nautilus en oro rosa de 18 quilates. La misma arquitectura deportiva, con la calidez de un metal precioso en caja y brazalete.",
+              "image": 0
+            },
+            {
+              "id": "esfera",
+              "eyebrow": "La esfera",
+              "title": "Marrón degradé",
+              "text": "Esfera marrón que pasa al negro en el borde, con el relieve horizontal propio de la colección e índices aplicados en oro.",
+              "image": 1
+            },
+            {
+              "id": "caja",
+              "eyebrow": "La caja",
+              "title": "Oro rosa de 18 quilates",
+              "text": "Caja de 40 mm con bisel octogonal satinado y biseles pulidos que capturan la luz en cada ángulo.",
+              "image": 0
+            },
+            {
+              "id": "movimiento",
+              "eyebrow": "El movimiento",
+              "title": "Calibre 26-330 S C",
+              "text": "El mismo calibre automático de la referencia en acero, con segundero central y fecha, terminado según los criterios del Sello Patek Philippe.",
+              "image": 1
+            },
+            {
+              "id": "malla",
+              "eyebrow": "El brazalete",
+              "title": "Oro macizo",
+              "text": "Brazalete integrado en oro rosa, con eslabones de acabado alternado y cierre desplegable.",
+              "image": 0
+            }
+          ],
+          "specifications": {
+            "title": "Especificaciones técnicas",
+            "image": 1,
+            "items": [
+              {
+                "label": "Referencia",
+                "value": "5711/1R"
+              },
+              {
+                "label": "Caja",
+                "value": "Oro rosa de 18 quilates, 40 mm"
+              },
+              {
+                "label": "Altura",
+                "value": "8,3 mm"
+              },
+              {
+                "label": "Hermeticidad",
+                "value": "120 m"
+              },
+              {
+                "label": "Calibre",
+                "value": "26-330 S C, carga automática"
+              },
+              {
+                "label": "Reserva de marcha",
+                "value": "35 a 45 horas"
+              },
+              {
+                "label": "Frecuencia",
+                "value": "28.800 a/h (4 Hz)"
+              },
+              {
+                "label": "Funciones",
+                "value": "Horas, minutos, segundero central, fecha"
+              },
+              {
+                "label": "Esfera",
+                "value": "Marrón degradé con relieve horizontal"
+              },
+              {
+                "label": "Brazalete",
+                "value": "Oro rosa, cierre desplegable"
+              },
+              {
+                "label": "Cristal",
+                "value": "Zafiro, fondo de zafiro"
+              }
+            ]
+          }
+        },
+        {
+          "id": "nautilus-cronografo-denim",
+          "name": "Nautilus Cronógrafo · Denim",
+          "collection": "Nautilus",
+          "reference": "Ref. 5980/60G",
+          "palette": {
+            "dial": "#2f4a6b",
+            "metal": "platinum",
+            "strap": "leather",
+            "strapColor": "#3b5675"
+          },
+          "images": [
+            "assets/patek-philippe/nautilus-cronografo-denim/01.webp",
+            "assets/patek-philippe/nautilus-cronografo-denim/02.webp"
+          ],
+          "sections": [
+            {
+              "id": "presentacion",
+              "eyebrow": "Presentación",
+              "title": "Nautilus Cronógrafo",
+              "text": "Una lectura informal del Nautilus: caja de oro blanco y correa con aspecto de tela vaquera. Presentado en 2019.",
+              "image": 0
+            },
+            {
+              "id": "esfera",
+              "eyebrow": "La esfera",
+              "title": "Un solo contador",
+              "text": "Esfera azul con textura de tela. Un único contador a las 6 horas reúne los 60 minutos y las 12 horas del cronógrafo, para una lectura despejada.",
+              "image": 1
+            },
+            {
+              "id": "caja",
+              "eyebrow": "La caja",
+              "title": "Oro blanco, 40,5 mm",
+              "text": "Caja de oro blanco de 18 quilates con los pulsadores del cronógrafo integrados en las aletas laterales.",
+              "image": 0
+            },
+            {
+              "id": "movimiento",
+              "eyebrow": "El movimiento",
+              "title": "Calibre CH 28-520 C",
+              "text": "Cronógrafo automático con función flyback: un solo pulsador detiene, pone en cero y vuelve a arrancar la medición.",
+              "image": 1
+            },
+            {
+              "id": "malla",
+              "eyebrow": "La correa",
+              "title": "Correa denim",
+              "text": "Correa de material compuesto con el aspecto de la tela vaquera, costuras al tono y cierre desplegable en oro blanco.",
+              "image": 0
+            }
+          ],
+          "specifications": {
+            "title": "Especificaciones técnicas",
+            "image": 1,
+            "items": [
+              {
+                "label": "Referencia",
+                "value": "5980/60G"
+              },
+              {
+                "label": "Caja",
+                "value": "Oro blanco de 18 quilates, 40,5 mm"
+              },
+              {
+                "label": "Altura",
+                "value": "12,2 mm"
+              },
+              {
+                "label": "Hermeticidad",
+                "value": "120 m"
+              },
+              {
+                "label": "Calibre",
+                "value": "CH 28-520 C, cronógrafo flyback automático"
+              },
+              {
+                "label": "Reserva de marcha",
+                "value": "45 a 55 horas"
+              },
+              {
+                "label": "Funciones",
+                "value": "Horas, minutos, segundero pequeño, fecha, cronógrafo de 60 minutos y 12 horas"
+              },
+              {
+                "label": "Esfera",
+                "value": "Azul con textura de tela"
+              },
+              {
+                "label": "Correa",
+                "value": "Material compuesto efecto denim, cierre desplegable"
+              },
+              {
+                "label": "Cristal",
+                "value": "Zafiro, fondo de zafiro"
+              }
+            ]
+          }
+        }
+      ],
+      "layout": "editorial"
     },
     {
       "id": "audemars-piguet",

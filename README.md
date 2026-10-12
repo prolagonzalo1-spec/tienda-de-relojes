@@ -68,6 +68,7 @@ Todo el contenido sale de `data.json`; para agregar marcas o modelos no hace fal
 }
 ```
 
+- `"layout": "editorial"` en una marca cambia la presentación: catálogo en filas alternadas y ficha con portada a sangre y secciones que alternan imagen y texto (lo usa Patek Philippe). Sin ese campo se usa la grilla y la ficha con imagen fija (Rolex).
 - Una marca con `"models": []` (o con `"status": "coming-soon"`) aparece como **Próximamente**. Al cargarle modelos se habilita sola.
 - La primera imagen de `images` es la foto del catálogo.
 - `images` puede tener menos de 6 fotos: varias secciones pueden apuntar al mismo índice.
@@ -77,7 +78,7 @@ Todo el contenido sale de `data.json`; para agregar marcas o modelos no hace fal
 | Marca | Estado | Modelos |
 |---|---|---|
 | Rolex | Disponible | Submariner Date Azul (126619LB), Oro y azul (126618LB), Oro y negro (126618LN), Submariner Negro (124060), Submariner Date Verde (116610LV) |
-| Patek Philippe | Próximamente | — |
+| Patek Philippe | Disponible (editorial) | Nautilus Acero (5711/1A), Nautilus Oro rosa (5711/1R), Nautilus Cronógrafo Denim (5980/60G) |
 | Audemars Piguet | Próximamente | — |
 
 ## Assets
