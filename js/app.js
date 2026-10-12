@@ -751,7 +751,7 @@
       var detail = seen;
       used[imgIdx] = true; prevQuote = false; flip = !flip;
       return '<section class="pe-split' + (flip ? '' : ' is-reverse') + '" id="' + esc(s.id) + '">' +
-        '<figure class="pe-figure' + (detail ? ' is-detail' : '') + '">' + imgTag(images[imgIdx], model.name + ' — ' + s.eyebrow, key, imgIdx, 'loading="lazy"') + '</figure>' +
+        '<figure class="pe-figure' + (detail ? ' is-detail' : '') + '"><div class="pe-window">' + imgTag(images[imgIdx], model.name + ' — ' + s.eyebrow, key, imgIdx, 'loading="lazy"') + '</div></figure>' +
         '<div class="pe-copy">' + copy + '</div>' +
       '</section>';
     }).join('');
@@ -768,7 +768,7 @@
 
     app.innerHTML =
       '<article class="pe">' +
-        '<header class="pe-hero">' +
+        '<header class="pe-hero"><div class="pe-hero-frame"><div class="pe-hero-window on-stage">' +
           '<div class="pe-hero-media">' + imgTag(images[0], model.name, key, 0, 'loading="eager"') + '</div>' +
           '<div class="pe-hero-copy">' +
             '<p class="eyebrow pe-hero-in">' + esc(model.collection) + '</p>' +
@@ -776,7 +776,7 @@
             '<p class="pe-hero-text pe-hero-in">' + esc(hero.text) + '</p>' +
             '<p class="meta-label pe-hero-in">' + esc(model.reference) + '</p>' +
           '</div>' +
-        '</header>' +
+        '</div></div></header>' +
         blocks + specsHTML +
         modelNextHTML(brand, model) +
       '</article>' + footerHTML();
@@ -787,7 +787,7 @@
     animate(function () {
       gsap.fromTo('.pe-hero-media img', { scale: 1.12 }, { scale: 1, duration: 3, ease: 'power2.out' });
       gsap.from('.pe-hero-in', { autoAlpha: 0, y: 40, duration: 1.8, stagger: 0.14, delay: 0.5 });
-      gsap.to('.pe-hero-media img', { yPercent: 8, ease: 'none',
+      gsap.to('.pe-hero-media img', { yPercent: 6, ease: 'none',
         scrollTrigger: { trigger: '.pe-hero', start: 'top top', end: 'bottom top', scrub: true } });
 
       gsap.utils.toArray('.pe-figure').forEach(function (fig) {
@@ -815,10 +815,11 @@
     var model = findModel(brand, modelId);
     if (!model) return renderNotFound();
 
-    setStage(true);
     setHeader({ back: { href: '#/marca/' + brand.id, label: brand.name }, context: model.collection });
     document.title = model.name + ' — ' + brand.name + ' — Luxury Time';
+    // La ficha editorial sigue el tema elegido (noche / claro); la de imagen fija es "teatro" y va siempre en noche
     if (brand.layout === 'editorial') return renderModelEditorial(brand, model);
+    setStage(true);
 
     var key = placeholderOpts(brand, model);
     var images = model.images || [];
